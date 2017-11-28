@@ -9,4 +9,10 @@
 
 #include <stdio.h>
 
+#include "sgbd.h"
+
+BDD* newBDD(void);
+void openBDD(char* parPath, BDD bdd);
+
 #endif /* iohelper_h */
+

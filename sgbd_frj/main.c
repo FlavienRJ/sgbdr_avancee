@@ -2,12 +2,14 @@
  * Programme funct.c
  * Création d'une mini base de données en mémoire
  * pour illustrer l'algèbre relationnelle
+ * ex d'implementation : https://github.com/angelricardoh/sgbd
  */
 
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "func.h"
+#include "sgbd.h"
+#include "iohelper.h"
 
 NUPLET newNUPLET(int size){
 	NUPLET temp;

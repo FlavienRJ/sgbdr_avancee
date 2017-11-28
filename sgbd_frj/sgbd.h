@@ -1,13 +1,36 @@
 /*
- * funct.h
+ * CORE HEADER
  *
  */
 
+#pragma once
 
 #include <stdio.h>
 
-typedef struct nuplet {int* val; int size;} NUPLET;
-typedef struct relation {NUPLET* ligne; int attsize; int size; int sizemax;} RELATION;
+
+typedef struct nuplet
+{
+	int* 	val;
+	int 	size;
+	
+} NUPLET;
+
+typedef struct relation
+{
+	NUPLET* ligne;
+	int 	attsize;
+	int 	size;
+	int 	sizemax;
+	
+} RELATION;
+
+typedef struct bdd
+{
+	char* 	path;
+	NUPLET* data;
+	int		state;
+	
+} BDD;
 
 /*
  * Opérations pour manipuler les nuplets et les relations

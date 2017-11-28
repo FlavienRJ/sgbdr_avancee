@@ -32,7 +32,7 @@
 /* Begin PBXFileReference section */
 		03151F4C1FCDC2B900858872 /* sgbd_frj */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sgbd_frj; sourceTree = BUILT_PRODUCTS_DIR; };
 		03151F4F1FCDC2B900858872 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		03151F561FCDC32000858872 /* func.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = func.h; sourceTree = "<group>"; };
+		03151F561FCDC32000858872 /* sgbd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sgbd.h; sourceTree = "<group>"; };
 		03C9E89A1FCDC531004A02E8 /* parsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parsing.h; sourceTree = "<group>"; };
 		03C9E89B1FCDC531004A02E8 /* parsing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parsing.c; sourceTree = "<group>"; };
 		03C9E89D1FCDC5CE004A02E8 /* operateurs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = operateurs.h; sourceTree = "<group>"; };
@@ -47,6 +47,7 @@
 		03C9E8AA1FCDC6C6004A02E8 /* transaction.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = transaction.c; sourceTree = "<group>"; };
 		03C9E8AC1FCDC734004A02E8 /* iohelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iohelper.h; sourceTree = "<group>"; };
 		03C9E8AD1FCDC734004A02E8 /* iohelper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iohelper.c; sourceTree = "<group>"; };
+		03C9E8B01FCDC921004A02E8 /* sgbd_frj.profdata */ = {isa = PBXFileReference; lastKnownFileType = file; path = sgbd_frj.profdata; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,7 @@
 			children = (
 				03151F4E1FCDC2B900858872 /* sgbd_frj */,
 				03151F4D1FCDC2B900858872 /* Products */,
+				03C9E8AF1FCDC921004A02E8 /* OptimizationProfiles */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,7 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				03151F4F1FCDC2B900858872 /* main.c */,
-				03151F561FCDC32000858872 /* func.h */,
+				03151F561FCDC32000858872 /* sgbd.h */,
 				03C9E89A1FCDC531004A02E8 /* parsing.h */,
 				03C9E89B1FCDC531004A02E8 /* parsing.c */,
 				03C9E89D1FCDC5CE004A02E8 /* operateurs.h */,
@@ -97,6 +99,14 @@
 				03C9E8AD1FCDC734004A02E8 /* iohelper.c */,
 			);
 			path = sgbd_frj;
+			sourceTree = "<group>";
+		};
+		03C9E8AF1FCDC921004A02E8 /* OptimizationProfiles */ = {
+			isa = PBXGroup;
+			children = (
+				03C9E8B01FCDC921004A02E8 /* sgbd_frj.profdata */,
+			);
+			path = OptimizationProfiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,7 +286,9 @@
 		03151F541FCDC2B900858872 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -284,7 +296,9 @@
 		03151F551FCDC2B900858872 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

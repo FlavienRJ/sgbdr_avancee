@@ -14,6 +14,7 @@
 		03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A41FCDC660004A02E8 /* optimisation.c */; };
 		03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A71FCDC690004A02E8 /* controle_acces.c */; };
 		03C9E8AB1FCDC6C6004A02E8 /* transaction.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8AA1FCDC6C6004A02E8 /* transaction.c */; };
+		03C9E8AE1FCDC734004A02E8 /* iohelper.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8AD1FCDC734004A02E8 /* iohelper.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +45,8 @@
 		03C9E8A71FCDC690004A02E8 /* controle_acces.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = controle_acces.c; sourceTree = "<group>"; };
 		03C9E8A91FCDC6C6004A02E8 /* transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
 		03C9E8AA1FCDC6C6004A02E8 /* transaction.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = transaction.c; sourceTree = "<group>"; };
+		03C9E8AC1FCDC734004A02E8 /* iohelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iohelper.h; sourceTree = "<group>"; };
+		03C9E8AD1FCDC734004A02E8 /* iohelper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iohelper.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				03C9E8A71FCDC690004A02E8 /* controle_acces.c */,
 				03C9E8A91FCDC6C6004A02E8 /* transaction.h */,
 				03C9E8AA1FCDC6C6004A02E8 /* transaction.c */,
+				03C9E8AC1FCDC734004A02E8 /* iohelper.h */,
+				03C9E8AD1FCDC734004A02E8 /* iohelper.c */,
 			);
 			path = sgbd_frj;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				03C9E8A21FCDC606004A02E8 /* indexation.c in Sources */,
 				03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */,
 				03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */,
+				03C9E8AE1FCDC734004A02E8 /* iohelper.c in Sources */,
 				03C9E89F1FCDC5CE004A02E8 /* operateurs.c in Sources */,
 				03C9E8AB1FCDC6C6004A02E8 /* transaction.c in Sources */,
 				03C9E89C1FCDC531004A02E8 /* parsing.c in Sources */,

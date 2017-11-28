@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		03151F501FCDC2B900858872 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 03151F4F1FCDC2B900858872 /* main.c */; };
+		03C9E89C1FCDC531004A02E8 /* parsing.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89B1FCDC531004A02E8 /* parsing.c */; };
+		03C9E89F1FCDC5CE004A02E8 /* operateurs.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89E1FCDC5CE004A02E8 /* operateurs.c */; };
+		03C9E8A21FCDC606004A02E8 /* indexation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A11FCDC606004A02E8 /* indexation.c */; };
+		03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A41FCDC660004A02E8 /* optimisation.c */; };
+		03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A71FCDC690004A02E8 /* controle_acces.c */; };
+		03C9E8AB1FCDC6C6004A02E8 /* transaction.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8AA1FCDC6C6004A02E8 /* transaction.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +32,18 @@
 		03151F4C1FCDC2B900858872 /* sgbd_frj */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sgbd_frj; sourceTree = BUILT_PRODUCTS_DIR; };
 		03151F4F1FCDC2B900858872 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		03151F561FCDC32000858872 /* func.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = func.h; sourceTree = "<group>"; };
+		03C9E89A1FCDC531004A02E8 /* parsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parsing.h; sourceTree = "<group>"; };
+		03C9E89B1FCDC531004A02E8 /* parsing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parsing.c; sourceTree = "<group>"; };
+		03C9E89D1FCDC5CE004A02E8 /* operateurs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = operateurs.h; sourceTree = "<group>"; };
+		03C9E89E1FCDC5CE004A02E8 /* operateurs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = operateurs.c; sourceTree = "<group>"; };
+		03C9E8A01FCDC606004A02E8 /* indexation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = indexation.h; sourceTree = "<group>"; };
+		03C9E8A11FCDC606004A02E8 /* indexation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = indexation.c; sourceTree = "<group>"; };
+		03C9E8A31FCDC660004A02E8 /* optimisation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = optimisation.h; sourceTree = "<group>"; };
+		03C9E8A41FCDC660004A02E8 /* optimisation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = optimisation.c; sourceTree = "<group>"; };
+		03C9E8A61FCDC690004A02E8 /* controle_acces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = controle_acces.h; sourceTree = "<group>"; };
+		03C9E8A71FCDC690004A02E8 /* controle_acces.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = controle_acces.c; sourceTree = "<group>"; };
+		03C9E8A91FCDC6C6004A02E8 /* transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
+		03C9E8AA1FCDC6C6004A02E8 /* transaction.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = transaction.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +78,18 @@
 			children = (
 				03151F4F1FCDC2B900858872 /* main.c */,
 				03151F561FCDC32000858872 /* func.h */,
+				03C9E89A1FCDC531004A02E8 /* parsing.h */,
+				03C9E89B1FCDC531004A02E8 /* parsing.c */,
+				03C9E89D1FCDC5CE004A02E8 /* operateurs.h */,
+				03C9E89E1FCDC5CE004A02E8 /* operateurs.c */,
+				03C9E8A01FCDC606004A02E8 /* indexation.h */,
+				03C9E8A11FCDC606004A02E8 /* indexation.c */,
+				03C9E8A31FCDC660004A02E8 /* optimisation.h */,
+				03C9E8A41FCDC660004A02E8 /* optimisation.c */,
+				03C9E8A61FCDC690004A02E8 /* controle_acces.h */,
+				03C9E8A71FCDC690004A02E8 /* controle_acces.c */,
+				03C9E8A91FCDC6C6004A02E8 /* transaction.h */,
+				03C9E8AA1FCDC6C6004A02E8 /* transaction.c */,
 			);
 			path = sgbd_frj;
 			sourceTree = "<group>";
@@ -121,6 +151,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C9E8A21FCDC606004A02E8 /* indexation.c in Sources */,
+				03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */,
+				03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */,
+				03C9E89F1FCDC5CE004A02E8 /* operateurs.c in Sources */,
+				03C9E8AB1FCDC6C6004A02E8 /* transaction.c in Sources */,
+				03C9E89C1FCDC531004A02E8 /* parsing.c in Sources */,
 				03151F501FCDC2B900858872 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,6 @@
+* Lecture de fichier et sauvegarde de bdd dans le fichier
+* Fonctions courante de gestion de bdd en memoire
+* implémentation de l'union, de la projection et selection
+* convertisseur de sql declaratif en plan d'execution
+* langage pour représenter une expression de l'algebre relationnel
+

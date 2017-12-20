@@ -28,7 +28,7 @@ typedef struct bdd
 {
 	char* 	path;
 	NUPLET* data;
-	int		state; //0 = uninitialized, 1 = ready
+	int		state; //0 = uninitialized, 1 = not read, 2= ready
 	
 } BDD;
 

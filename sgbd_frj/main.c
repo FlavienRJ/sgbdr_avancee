@@ -37,12 +37,16 @@ int main(int argc, char **argv)
 	set(n2, 1, 42);
 	set(n2, 2, -15);
 	insert(&p, n2);
+	printf("\n");
+	afficheNUPLET(n2);
 	
 	
 	NUPLET n3 = newNUPLET(3);
 	set(n3, 0, 3);
 	set(n3, 1, 62);
 	set(n3, 2, -99);
+	printf("\n");
+	afficheNUPLET(n3);
 	
 	
 	RELATION q = newRELATION(3, 10);

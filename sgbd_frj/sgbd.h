@@ -26,8 +26,11 @@ typedef struct relation
 
 typedef struct bdd
 {
-	char* 	path;
-	NUPLET* data;
+	char** 	path;
+	char** 	noms;
+	NUPLET** data;
+	int 	nbtable;
+	int* 	sizetable;
 	int		state; //0 = uninitialized, 1 = not read, 2= ready
 	
 } BDD;

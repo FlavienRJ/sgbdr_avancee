@@ -8,37 +8,53 @@
 
 #include "nuplet_helper.h"
 
-NUPLET newNUPLET(int size){
+NUPLET newNUPLET(int size)
+{
 	NUPLET temp;
 	temp.val =  (int*) malloc(sizeof(int)*size);
 	temp.size = size;
 	return temp;
-};
+}
 
-void set(NUPLET n, int col, int val){
+void set(NUPLET n, int col, int val)
+{
 	n.val[col] = val;
 }
 
-int get(NUPLET n, int col){
+int get(NUPLET n, int col)
+{
 	return n.val[col];
 }
 
-int compatible(RELATION r, NUPLET n){
+int compatible(RELATION r, NUPLET n)
+{
 	if(r.attsize == n.size)
 		return 1;
 	else
 		return 0;
 }
 
-void insert (RELATION* r, NUPLET n){
-	if((r->size < r->sizemax) && (compatible(*r,n)==1)){
+void insert (RELATION* r, NUPLET n)
+{
+	if((r->size < r->sizemax) && (compatible(*r,n)==1))
+	{
 		r->ligne[r->size] = n;
 		r->size++;
 	}
 }
 
+void copy(const NUPLET org, NUPLET* cpy)
+{
+	int i;
+	for (i=0; i < org.size; i++)
+	{
+		set(*cpy, i, get(org, i));
+	}
+}
 
-NUPLET getNUPLET(RELATION r, int ligne){
+
+NUPLET getNUPLET(RELATION r, int ligne)
+{
 	if(ligne < r.size)
 		return r.ligne[ligne];
 	NUPLET err = newNUPLET(1);
@@ -46,7 +62,8 @@ NUPLET getNUPLET(RELATION r, int ligne){
 	return err;
 }
 
-void afficheRELATION(RELATION r){
+void afficheRELATION(RELATION r)
+{
 	int i;
 	printf("RELATION === Taille %d sur %d\n================== \n", r.size, r.sizemax);
 	for(i=0;i<r.size;i++){
@@ -57,7 +74,8 @@ void afficheRELATION(RELATION r){
 }
 
 
-void afficheNUPLET(NUPLET n){
+void afficheNUPLET(NUPLET n)
+{
 	int i;
 	for(i=0;i<n.size;i++){
 		printf("%d ", n.val[i]);

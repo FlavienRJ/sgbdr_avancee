@@ -21,6 +21,7 @@ int store(BDD* parBdd, const char* parTable, int parPos, NUPLET parVal);
 NUPLET getNupletBdd(BDD parBdd,const char* parTable, int parPos);
 int size(BDD parBdd, const char* parTable);
 int tableDansBdd(const BDD parBdd, const char* parTable);
+void printTable(const BDD parBdd, const char* parTable);
 
 #endif /* iohelper_h */
 

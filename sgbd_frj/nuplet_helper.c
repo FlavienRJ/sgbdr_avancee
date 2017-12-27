@@ -26,23 +26,6 @@ int get(NUPLET n, int col)
 	return n.val[col];
 }
 
-int compatible(RELATION r, NUPLET n)
-{
-	if(r.attsize == n.size)
-		return 1;
-	else
-		return 0;
-}
-
-void insert (RELATION* r, NUPLET n)
-{
-	if((r->size < r->sizemax) && (compatible(*r,n)==1))
-	{
-		r->ligne[r->size] = n;
-		r->size++;
-	}
-}
-
 void copy(const NUPLET org, NUPLET* cpy)
 {
 	int i;
@@ -52,26 +35,15 @@ void copy(const NUPLET org, NUPLET* cpy)
 	}
 }
 
-
-NUPLET getNUPLET(RELATION r, int ligne)
+NUPLET newErrNUPLET(void)
 {
-	if(ligne < r.size)
-		return r.ligne[ligne];
 	NUPLET err = newNUPLET(1);
 	set(err, 0, -1);
 	return err;
 }
 
-void afficheRELATION(RELATION r)
-{
-	int i;
-	printf("RELATION === Taille %d sur %d\n================== \n", r.size, r.sizemax);
-	for(i=0;i<r.size;i++){
-		afficheNUPLET(getNUPLET(r, i));
-		printf("\n");
-	}
-	printf("================== \n");
-}
+
+
 
 
 void afficheNUPLET(NUPLET n)

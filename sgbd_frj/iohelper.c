@@ -126,7 +126,7 @@ NUPLET getNupletBdd(BDD parBdd, const char* parTable, int parPos)
 	int i;
 	if ((i = tableDansBdd(parBdd, parTable)) < 0)
 	{
-		return newNUPLET(0);
+		return newErrNUPLET();
 	}
 	
 	NUPLET res = newNUPLET(parBdd.data[i][parPos].size);
@@ -156,3 +156,32 @@ int tableDansBdd(const BDD parBdd, const char* parTable)
 	}
 	return -1;
 }
+
+void printTable(const BDD parBdd, const char* parTable)
+{
+	int i = tableDansBdd(parBdd, parTable);
+	if (i < 0)
+	{
+		printf("La table %s n'existe pas dans la bdd\n", parTable);
+	}
+	int j;
+	printf("Table %s a %d elements : \n", parTable, parBdd.sizetable[i]);
+	for (j = 0; j < parBdd.sizetable[i]; i++)
+	{
+		afficheNUPLET(parBdd.data[i][j]);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

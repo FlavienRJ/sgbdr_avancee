@@ -8,16 +8,6 @@
 
 #include "operateurs.h"
 
-RELATION newRELATION(int attsize, int maxsize)
-{
-	RELATION temp;
-	temp.ligne = (NUPLET*) malloc(sizeof(NUPLET)*maxsize);
-	temp.sizemax = maxsize;
-	temp.size = 0;
-	temp.attsize = attsize;
-	return temp;
-}
-
 RELATION OpUnion(RELATION r1, RELATION r2)
 {
 	RELATION temp = newRELATION(r1.attsize, r1.sizemax + r2.sizemax);
@@ -37,4 +27,43 @@ RELATION OpUnion(RELATION r1, RELATION r2)
 	insert(&err, tmp);
 	return err;
 }
+
+RELATION OpInter(RELATION r1, RELATION r2)
+{
+	return newRELATION(1, 1);
+}
+
+RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
+{
+	return newRELATION(1, 1);
+}
+
+RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
+{
+	return newRELATION(1, 1);
+}
+
+RELATION OpProjection(RELATION r1, int* attributs, int taille)
+{
+	return newRELATION(1, 1);
+}
+
+RELATION OpProduitCartesien(RELATION r1, RELATION r2)
+{
+	return newRELATION(1, 1);
+}
+
+RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2)
+{
+	return newRELATION(1, 1);
+}
+
+
+
+
+
+
+
+
+
 

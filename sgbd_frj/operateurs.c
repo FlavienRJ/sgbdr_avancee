@@ -8,6 +8,7 @@
 
 #include "operateurs.h"
 
+//SELECT * FROM r1 UNION SELECT * FROM r2;
 RELATION OpUnion(RELATION r1, RELATION r2)
 {
 	RELATION temp = newRELATION(r1.attsize, r1.sizemax + r2.sizemax);
@@ -26,26 +27,65 @@ RELATION OpUnion(RELATION r1, RELATION r2)
 	return err;
 }
 
+//SELECT * FROM r1 INTERSECT SELECT * FROM r2;
 RELATION OpInter(RELATION r1, RELATION r2)
 {
-	return newRELATION(1, 1);
+	if (r1.attsize != r2.attsize)
+	{
+		RELATION err = newRELATION(0, 1);
+		insert(&err, newErrNUPLET());
+		return err;
+	}
+	
+	int i;
+	int j;
+	int k;
+	bool identique;
+	RELATION res = newRELATION(r1.attsize, r1.sizemax);
+	
+	//A OPTIMISER ABSOLUMENT SUR LES BOUCLES
+	for (i=0; i < r1.size; i++)
+	{
+		for (j=0; j < r2.size; j++)
+		{
+			identique = true;
+			for (k=0; k < r1.attsize; k++)
+			{
+				if (r1.ligne[i].val[k] != r2.ligne[j].val[k])
+				{
+					identique = false;
+					break;
+				}
+			}
+			if (identique)
+			{
+				NUPLET tmp = newNUPLET(r1.attsize);
+				copy(r1.ligne[i], &tmp);
+				insert(&res, tmp);
+			}
+		}
+	}
+	return res;
 }
 
+//SELECT * FROM r1 WHERE r1.att operateur(<,=,...) valeur
 RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 {
 	return newRELATION(1, 1);
 }
 
+//SELECT * FROM r1 WHERE r1.att operateur(<,=,...) r1.att2
 RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 {
 	return newRELATION(1, 1);
 }
 
+//SELECT attributs FROM r1;
 RELATION OpProjection(RELATION r1, int* attributs, int taille)
 {
 	int i;
 	int j;
-	RELATION res = newRELATION(taille, r1.size);
+	RELATION res = newRELATION(taille, r1.sizemax);
 	NUPLET tmp = newNUPLET(taille);
 	for (i=0; i < r1.size; i++)
 	{
@@ -58,6 +98,7 @@ RELATION OpProjection(RELATION r1, int* attributs, int taille)
 	return res;
 }
 
+//SELECT * FROM r1,r2;
 RELATION OpProduitCartesien(RELATION r1, RELATION r2)
 {
 	int i;
@@ -88,9 +129,39 @@ RELATION OpProduitCartesien(RELATION r1, RELATION r2)
 	return res;
 }
 
+// SELECT * FROM r1, r2 WHERE r1.attr1 = r2.attr2;
 RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2)
 {
-	return newRELATION(1, 1);
+	int i;
+	int j;
+	int k;
+	int maxsize = (r1.sizemax > r2.sizemax) ? r1.sizemax : r2.sizemax;
+	RELATION res = newRELATION((r1.attsize + r2.attsize - 1), maxsize);
+	NUPLET tmp = newNUPLET(r1.attsize + r2.attsize - 1);
+	
+	for (i=0; i < r1.size; i++)
+	{
+		for (j=0; j < r2.size; j++)
+		{
+			if (r1.ligne[i].val[attr1] == r2.ligne[j].val[attr2])
+			{
+				for (k=0; k < r1.attsize; k++)
+				{
+					set(tmp, k, r1.ligne[i].val[k]);
+				}
+				for (k=0; k < r2.attsize; k++)
+				{
+					if (k == attr2)
+					{
+						continue;
+					}
+					set(tmp, k + r1.attsize, r2.ligne[j].val[k]);
+				}
+				insert(&res, tmp);
+			}
+		}
+	}
+	return res;
 }
 
 

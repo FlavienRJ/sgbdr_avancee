@@ -35,6 +35,7 @@
 		03151F4C1FCDC2B900858872 /* sgbd_frj */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sgbd_frj; sourceTree = BUILT_PRODUCTS_DIR; };
 		03151F4F1FCDC2B900858872 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		03151F561FCDC32000858872 /* sgbd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sgbd.h; sourceTree = "<group>"; };
+		0361C53E1FFE89690091D459 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		038327321FF3A19100D90D7A /* relation_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = relation_helper.h; sourceTree = "<group>"; };
 		038327331FF3A19100D90D7A /* relation_helper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = relation_helper.c; sourceTree = "<group>"; };
 		03C636DE1FE921510075A3FC /* nuplet_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = nuplet_helper.h; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 				03C636DF1FE921510075A3FC /* nuplet_helper.c */,
 				038327321FF3A19100D90D7A /* relation_helper.h */,
 				038327331FF3A19100D90D7A /* relation_helper.c */,
+				0361C53E1FFE89690091D459 /* README.md */,
 			);
 			path = sgbd_frj;
 			sourceTree = "<group>";

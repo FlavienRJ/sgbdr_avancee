@@ -305,11 +305,10 @@ RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2)
 				}
 				for (k=0; k < r2.attsize; k++)
 				{
-					if (k == attr2)
+					if (k != attr2)
 					{
-						continue;
+						set(tmp, k + r1.attsize, r2.ligne[j].val[k]);
 					}
-					set(tmp, k + r1.attsize, r2.ligne[j].val[k]);
 				}
 				insert(&res, tmp);
 			}

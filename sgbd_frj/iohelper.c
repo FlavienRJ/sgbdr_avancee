@@ -32,7 +32,7 @@ int openTable(char* parPath, char* parName, BDD* parBdd)
 	long nb_nuplet = 0; //nombre de ligne du nuplet
 	
 	//On lit la taille du nuplet sur la premiere ligne de la bdd
-	ret = fscanf (fp,"%s ",row);
+	fscanf (fp,"%s ",row);
 	tok = strsep(&row, ";");
 	len_nuplet = tok - "0";
 	tok = strsep(&row, ";");
@@ -75,7 +75,6 @@ int closeBDD(BDD* parBDD)
 		{
 			return -1;
 		}
-		j = 0;
 		fprintf(fp, "\n");
 		for (j=0; j < parBDD->sizetable[i]; j++) //Pour le nombre de ligne
 		{

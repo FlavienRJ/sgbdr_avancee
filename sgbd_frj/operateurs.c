@@ -71,13 +71,167 @@ RELATION OpInter(RELATION r1, RELATION r2)
 //SELECT * FROM r1 WHERE r1.att operateur(<,=,...) valeur
 RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 {
-	return newRELATION(1, 1);
+	int i;
+	int j;
+	if (att > r1.attsize)
+	{
+		RELATION err = newRELATION(0, 1);
+		insert(&err, newErrNUPLET());
+		return err;
+	}
+	RELATION res = newRELATION(r1.attsize, r1.size);
+	NUPLET tmp = newNUPLET(r1.attsize);
+	switch (operateur)
+	{
+	    //Operateur "=="
+		case 0:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att] == valeur)
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+		
+		//Operateur "<"
+		case 1:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att] < valeur)
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+		
+		//Operateur ">"
+		case 2:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att] > valeur)
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+		
+		//Operateur "!="
+		case 3:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att] != valeur)
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+			
+		default:
+			//Si ce n'est pas un operateur alors la RELATION sera VIDE (taille = 0)
+			break;
+	}
+
+	return res;
 }
 
 //SELECT * FROM r1 WHERE r1.att operateur(<,=,...) r1.att2
 RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 {
-	return newRELATION(1, 1);
+	int i;
+	int j;
+	if (att1 > r1.attsize || att2 > r1.attsize)
+	{
+		RELATION err = newRELATION(0, 1);
+		insert(&err, newErrNUPLET());
+		return err;
+	}
+	RELATION res = newRELATION(r1.attsize, r1.size);
+	NUPLET tmp = newNUPLET(r1.attsize);
+	switch (operateur)
+	{
+			//Operateur "=="
+		case 0:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att1] == r1.ligne[i].val[att2])
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+			
+			//Operateur "<"
+		case 1:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att1] < r1.ligne[i].val[att2])
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+			
+			//Operateur ">"
+		case 2:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att1] > r1.ligne[i].val[att2])
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+			
+			//Operateur "!="
+		case 3:
+			for (i=0; i < r1.size; i++)
+			{
+				if (r1.ligne[i].val[att1] != r1.ligne[i].val[att2])
+				{
+					for (j=0; j < r1.attsize; j++)
+					{
+						set(tmp, j, get(getNUPLET(r1, i), j));
+					}
+					insert(&res, tmp);
+				}
+			}
+			break;
+			
+		default:
+			//Si ce n'est pas un operateur alors la RELATION sera VIDE (taille = 0)
+			break;
+	}
+	
+	return res;
 }
 
 //SELECT attributs FROM r1;

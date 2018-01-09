@@ -8,7 +8,13 @@
 
 #include "operateurs.h"
 
-//SELECT * FROM r1 UNION SELECT * FROM r2;
+/** 
+ * @brief  operation d'UNION
+ * @note  SELECT * FROM r1 UNION SELECT * FROM r2; 
+ * @param  r1: 
+ * @param  r2: 
+ * @retval 
+ */
 RELATION OpUnion(RELATION r1, RELATION r2)
 {
 	RELATION temp = newRELATION(r1.attsize, r1.sizemax + r2.sizemax);
@@ -27,7 +33,13 @@ RELATION OpUnion(RELATION r1, RELATION r2)
 	return err;
 }
 
-//SELECT * FROM r1 INTERSECT SELECT * FROM r2;
+/** 
+ * @brief  operation Intersection
+ * @note   SELECT * FROM r1 INTERSECT SELECT * FROM r2;
+ * @param  r1: 
+ * @param  r2: 
+ * @retval 
+ */
 RELATION OpInter(RELATION r1, RELATION r2)
 {
 	if (r1.attsize != r2.attsize)
@@ -68,7 +80,15 @@ RELATION OpInter(RELATION r1, RELATION r2)
 	return res;
 }
 
-//SELECT * FROM r1 WHERE r1.att operateur(<,=,...) valeur
+/** 
+ * @brief  Operateur de Restriction pour une valeur fixe
+ * @note   SELECT * FROM r1 WHERE r1.att operateur(<,=,...) valeur
+ * @param  r1: 
+ * @param  att: 
+ * @param  operateur: 0 = "==", 1 = "<", 2 = ">", 3 = "!="
+ * @param  valeur: 
+ * @retval 
+ */
 RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 {
 	int i;
@@ -151,7 +171,15 @@ RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 	return res;
 }
 
-//SELECT * FROM r1 WHERE r1.att operateur(<,=,...) r1.att2
+/** 
+ * @brief  Operateur de Restriction pour une valeur variable
+ * @note   SELECT * FROM r1 WHERE r1.att operateur(<,=,...) r1.att2
+ * @param  r1: 
+ * @param  att1: 
+ * @param  operateur: 0 = "==", 1 = "<", 2 = ">", 3 = "!="
+ * @param  att2: 
+ * @retval 
+ */
 RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 {
 	int i;
@@ -234,7 +262,14 @@ RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 	return res;
 }
 
-//SELECT attributs FROM r1;
+/** 
+ * @brief  Operateur de projection
+ * @note   SELECT attributs FROM r1;
+ * @param  r1: 
+ * @param  attributs: 
+ * @param  taille: 
+ * @retval 
+ */
 RELATION OpProjection(RELATION r1, int* attributs, int taille)
 {
 	int i;
@@ -252,7 +287,13 @@ RELATION OpProjection(RELATION r1, int* attributs, int taille)
 	return res;
 }
 
-//SELECT * FROM r1,r2;
+/** 
+ * @brief  Operateur de produit cartesien
+ * @note   SELECT * FROM r1,r2;
+ * @param  r1: 
+ * @param  r2: 
+ * @retval 
+ */
 RELATION OpProduitCartesien(RELATION r1, RELATION r2)
 {
 	int i;
@@ -283,7 +324,15 @@ RELATION OpProduitCartesien(RELATION r1, RELATION r2)
 	return res;
 }
 
-// SELECT * FROM r1, r2 WHERE r1.attr1 = r2.attr2;
+/** 
+ * @brief  Operateur de jointure entre 2 relations
+ * @note   SELECT * FROM r1, r2 WHERE r1.attr1 = r2.attr2;
+ * @param  r1: 
+ * @param  r2: 
+ * @param  attr1: 
+ * @param  attr2: 
+ * @retval 
+ */
 RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2)
 {
 	int i;

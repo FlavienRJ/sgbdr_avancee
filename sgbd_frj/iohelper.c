@@ -1,5 +1,10 @@
 #include "iohelper.h"
 
+/** 
+ * @brief  Initialise une BDD
+ * @note   
+ * @retval un pointeur sur une BDD
+ */
 BDD* newBDD(void)
 {
 	BDD* res = (BDD*)malloc(sizeof(BDD));
@@ -10,6 +15,14 @@ BDD* newBDD(void)
 	return res;
 }
 
+/** 
+ * @brief  Importe les valeurs d'un fichier dans une table 
+ * @note   Mapping de toutes une bdd en memoire vive
+ * @param  parPath: le chemin vers le fichier
+ * @param  parName: le nom de la table ouverte
+ * @param  parBdd: pointeur vers une BDD
+ * @retval -1 si erreur
+ */
 int openTable(char* parPath, char* parName, BDD* parBdd)
 {
 	//On ouvre le fichier
@@ -62,6 +75,12 @@ int openTable(char* parPath, char* parName, BDD* parBdd)
 	return 0;
 }
 
+/** 
+ * @brief  Sauvegarde d'une BDD entiere (avec toutes les tables) dans des fichiers et fermeture
+ * @note   
+ * @param  parBDD: la BDD à fermer
+ * @retval -1 si erreur
+ */
 int closeBDD(BDD* parBDD)
 {
 	FILE * fp;
@@ -92,6 +111,15 @@ int closeBDD(BDD* parBDD)
 	return 0;
 }
 
+/** 
+ * @brief  Sauvegarde d'un NUPLET dans une table de la bdd
+ * @note   
+ * @param  parBdd: la BDD
+ * @param  parTable: le nom de la table
+ * @param  parPos: la position dans la table
+ * @param  parVal: le NUPLET à stocker
+ * @retval -1 si erreur
+ */
 int store(BDD* parBdd, const char* parTable, int parPos, NUPLET parVal)
 {
 	int i;
@@ -120,6 +148,14 @@ int store(BDD* parBdd, const char* parTable, int parPos, NUPLET parVal)
 	return 0;
 }
 
+/** 
+ * @brief  recuperation d'un nuplet dans une BDD
+ * @note   
+ * @param  parBdd: la BDD
+ * @param  parTable: le nom de la table
+ * @param  parPos: la position du NUPLET
+ * @retval le NUPLET
+ */
 NUPLET getNupletBdd(BDD parBdd, const char* parTable, int parPos)
 {
 	int i;
@@ -133,6 +169,13 @@ NUPLET getNupletBdd(BDD parBdd, const char* parTable, int parPos)
 	return res;
 }
 
+/** 
+ * @brief  retourne la taille d'une table de la BDD
+ * @note   
+ * @param  parBdd: la BDD
+ * @param  parTable: le nom de la table
+ * @retval la taille de la table
+ */
 int size(BDD parBdd, const char* parTable)
 {
 	int i;
@@ -143,6 +186,13 @@ int size(BDD parBdd, const char* parTable)
 	return parBdd.sizetable[i]; //renvoie le nombre de NUPLET dans une table
 }
 
+/** 
+ * @brief  verifie si une table existe dans la BDD
+ * @note   
+ * @param  parBdd: la BDD
+ * @param  parTable: le nom de la table
+ * @retval l'index de la table dans la BDD si elle existe
+ */
 int tableDansBdd(const BDD parBdd, const char* parTable)
 {
 	int i;
@@ -156,6 +206,13 @@ int tableDansBdd(const BDD parBdd, const char* parTable)
 	return -1;
 }
 
+/** 
+ * @brief  Affichage d'une table dans la console
+ * @note   
+ * @param  parBdd: la BDD
+ * @param  parTable: le nom de la table
+ * @retval None
+ */
 void printTable(const BDD parBdd, const char* parTable)
 {
 	int i = tableDansBdd(parBdd, parTable);

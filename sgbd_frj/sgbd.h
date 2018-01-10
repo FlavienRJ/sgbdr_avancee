@@ -86,7 +86,7 @@ typedef struct bdd
 {
 	char** 		path;
 	char** 		noms;
-	NUPLET** 	data;
+	RELATION* 	data;
 	int 		nbtable;
 	int* 		sizetable;
 	int			state;

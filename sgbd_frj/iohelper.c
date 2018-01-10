@@ -25,6 +25,8 @@ BDD* newBDD(void)
  */
 int openTable(char* parPath, char* parName, BDD* parBdd)
 {
+	NUPLET tmp;
+	
 	//On ouvre le fichier
 	FILE * fp;
 	if ((fp = fopen(parPath, "w+")) == NULL)
@@ -51,20 +53,22 @@ int openTable(char* parPath, char* parName, BDD* parBdd)
 	tok = strsep(&row, ";");
 	nb_nuplet = tok - "0";
 	
-	parBdd->data[parBdd->nbtable] = malloc(nb_nuplet*sizeof(NUPLET));
+	parBdd->data[parBdd->nbtable] = newRELATION((int)len_nuplet, (int)(nb_nuplet*2));
 	//On lit toutes les lignes du fichier que l'on stocke dans des nuplets
 
 	//Pour toutes les lignes
 	while ((ret = fscanf (fp,"%s ",row)) != EOF && ret != 0)
 	{
-		parBdd->data[parBdd->nbtable][i] = newNUPLET((int)len_nuplet);
+		//parBdd->data[parBdd->nbtable][i] = newNUPLET((int)len_nuplet);
 		j = 0;
+		tmp = newNUPLET((int)len_nuplet);
 		//Pour toutes les colonnes
 		while ((tok = strsep(&row, ";")))
 		{
-			set(parBdd->data[parBdd->nbtable][i], j, (int)(tok - "0"));
+			set(tmp, j, (int)(tok - "0"));
 			j++;
 		}
+		insert(&parBdd->data[parBdd->nbtable], tmp);
 		i++;
 		//printf("%s", row);
 	}
@@ -97,14 +101,14 @@ int closeBDD(BDD* parBDD)
 		fprintf(fp, "\n");
 		for (j=0; j < parBDD->sizetable[i]; j++) //Pour le nombre de ligne
 		{
-			for (k=0; k < parBDD->data[i][j].size; k++) //Pour le nombre de colonne
+			for (k=0; k < parBDD->data[i].size; k++) //Pour le nombre de colonne
 			{
-				fprintf(fp, "%d;", get(parBDD->data[i][j],k));
+				fprintf(fp, "%d;", get(parBDD->data[i].ligne[j],k));
 			}
 			fprintf(fp, "\n");
 		}
-		fseek(fp, 0, SEEK_SET); //verifier si ca fai tun append ou un insert
-		fprintf(fp, "%d;%d;",parBDD->data[i][j].size,j);
+		fseek(fp, 0, SEEK_SET); //verifier si ca fait un append ou un insert
+		fprintf(fp, "%d;%d;",parBDD->data[i].ligne[j].size,j);
 		fclose(fp);
 	}
 	free(parBDD);
@@ -116,7 +120,7 @@ int closeBDD(BDD* parBDD)
  * @note   
  * @param  parBdd: la BDD
  * @param  parTable: le nom de la table
- * @param  parPos: la position dans la table
+ * @param  parPos: la position dans la table pas utiliser a cause de RELATION
  * @param  parVal: le NUPLET à stocker
  * @retval -1 si erreur
  */
@@ -130,7 +134,7 @@ int store(BDD* parBdd, const char* parTable, int parPos, NUPLET parVal)
 		return -1;
 	}
 	//On realloue la taille de data pour la table
-	parBdd->data[i] = realloc(parBdd->data[i], (parBdd->sizetable[i] + 1));
+	/*parBdd->data[i] = realloc(parBdd->data[i], (parBdd->sizetable[i] + 1));
 	if (parBdd->data[i] == NULL)
 	{
 		return -1;
@@ -143,7 +147,8 @@ int store(BDD* parBdd, const char* parTable, int parPos, NUPLET parVal)
 		copy(parBdd->data[i][j-1], &parBdd->data[i][j]);
 	}
 	// La valeur de parVal est mis dans data[parPos], attention a verifier la compatibilite
-	parBdd->data[i][parPos] = parVal;
+	parBdd->data[i][parPos] = parVal;*/
+	insert(&parBdd->data[i], parVal);
 	
 	return 0;
 }
@@ -164,8 +169,8 @@ NUPLET getNupletBdd(BDD parBdd, const char* parTable, int parPos)
 		return newErrNUPLET();
 	}
 	
-	NUPLET res = newNUPLET(parBdd.data[i][parPos].size);
-	copy(parBdd.data[i][parPos], &res);
+	NUPLET res = newNUPLET(parBdd.data[i].attsize);
+	copy(parBdd.data[i].ligne[parPos], &res);
 	return res;
 }
 
@@ -222,10 +227,7 @@ void printTable(const BDD parBdd, const char* parTable)
 	}
 	int j;
 	printf("Table %s a %d elements : \n", parTable, parBdd.sizetable[i]);
-	for (j = 0; j < parBdd.sizetable[i]; i++)
-	{
-		afficheNUPLET(parBdd.data[i][j]);
-	}
+	afficheRELATION(parBdd.data[i]);
 }
 
 

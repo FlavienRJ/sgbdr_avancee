@@ -42,9 +42,34 @@ NUPLET newErrNUPLET(void)
 	return err;
 }
 
-
-
-
+//Retourne la position du premier NUPLET contenant les valeurs de att s'il existe, -1 sinon
+int findNuplet(const RELATION r, const int* att)
+{
+	int i;
+	int j;
+	bool is;
+	
+	for (i=0; i < r.size; i++)
+	{
+		is = true;
+		for (j=0; j < r.attsize; j++)
+		{
+			if (get(r.ligne[i], j) != att[j])
+			{
+				is = false;
+			}
+			if (!is)
+			{
+				break;
+			}
+		}
+		if (is)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
 
 void afficheNUPLET(NUPLET n)
 {

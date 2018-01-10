@@ -13,6 +13,7 @@
 
 #include "sgbd.h"
 #include "nuplet_helper.h"
+#include "relation_helper.h"
 
 BDD* newBDD(void);
 int openTable(char* parPath, char* parName, BDD* parBdd);

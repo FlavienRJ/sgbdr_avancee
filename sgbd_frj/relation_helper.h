@@ -8,6 +8,7 @@ RELATION newRELATION(int attsize, int maxsize);
 int compatible(RELATION r, NUPLET n);
 void insert(RELATION* r, NUPLET n);
 NUPLET getNUPLET(RELATION r, int ligne);
+int findNuplet(const RELATION r, const int* att);
 void afficheRELATION(RELATION r);
 
 #endif

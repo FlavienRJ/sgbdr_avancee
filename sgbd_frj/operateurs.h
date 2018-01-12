@@ -18,5 +18,13 @@ RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2);  // i
 RELATION OpProjection(RELATION r1, int* attributs, int taille);
 RELATION OpProduitCartesien(RELATION r1, RELATION r2);
 RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2);
+RELATION OpJointureHash(RELATION r1, RELATION r2, int attr1, int attr2);
+RELATION OpJointureMergeJoin(RELATION r1, RELATION r2, int attr1, int attr2);
+
+
+
+int hashCode(const int clef);
+void insertHash(TABLE_HASH* hash_table, int clef, NUPLET data);
 
 #endif
+

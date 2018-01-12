@@ -12,7 +12,7 @@
 		03C636E01FE921510075A3FC /* nuplet_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C636DF1FE921510075A3FC /* nuplet_helper.c */; };
 		03C9E89C1FCDC531004A02E8 /* parsing.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89B1FCDC531004A02E8 /* parsing.c */; };
 		03C9E89F1FCDC5CE004A02E8 /* operateurs.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89E1FCDC5CE004A02E8 /* operateurs.c */; };
-		03C9E8A21FCDC606004A02E8 /* indexation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A11FCDC606004A02E8 /* indexation.c */; };
+		03C9E8A21FCDC606004A02E8 /* table.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A11FCDC606004A02E8 /* table.c */; };
 		03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A41FCDC660004A02E8 /* optimisation.c */; };
 		03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A71FCDC690004A02E8 /* controle_acces.c */; };
 		03C9E8AB1FCDC6C6004A02E8 /* transaction.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8AA1FCDC6C6004A02E8 /* transaction.c */; };
@@ -44,8 +44,8 @@
 		03C9E89B1FCDC531004A02E8 /* parsing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parsing.c; sourceTree = "<group>"; };
 		03C9E89D1FCDC5CE004A02E8 /* operateurs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = operateurs.h; sourceTree = "<group>"; };
 		03C9E89E1FCDC5CE004A02E8 /* operateurs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = operateurs.c; sourceTree = "<group>"; };
-		03C9E8A01FCDC606004A02E8 /* indexation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = indexation.h; sourceTree = "<group>"; };
-		03C9E8A11FCDC606004A02E8 /* indexation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = indexation.c; sourceTree = "<group>"; };
+		03C9E8A01FCDC606004A02E8 /* table.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
+		03C9E8A11FCDC606004A02E8 /* table.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = table.c; sourceTree = "<group>"; };
 		03C9E8A31FCDC660004A02E8 /* optimisation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = optimisation.h; sourceTree = "<group>"; };
 		03C9E8A41FCDC660004A02E8 /* optimisation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = optimisation.c; sourceTree = "<group>"; };
 		03C9E8A61FCDC690004A02E8 /* controle_acces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = controle_acces.h; sourceTree = "<group>"; };
@@ -94,8 +94,8 @@
 				03C9E89B1FCDC531004A02E8 /* parsing.c */,
 				03C9E89D1FCDC5CE004A02E8 /* operateurs.h */,
 				03C9E89E1FCDC5CE004A02E8 /* operateurs.c */,
-				03C9E8A01FCDC606004A02E8 /* indexation.h */,
-				03C9E8A11FCDC606004A02E8 /* indexation.c */,
+				03C9E8A01FCDC606004A02E8 /* table.h */,
+				03C9E8A11FCDC606004A02E8 /* table.c */,
 				03C9E8A31FCDC660004A02E8 /* optimisation.h */,
 				03C9E8A41FCDC660004A02E8 /* optimisation.c */,
 				03C9E8A61FCDC690004A02E8 /* controle_acces.h */,
@@ -179,7 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03C636E01FE921510075A3FC /* nuplet_helper.c in Sources */,
-				03C9E8A21FCDC606004A02E8 /* indexation.c in Sources */,
+				03C9E8A21FCDC606004A02E8 /* table.c in Sources */,
 				03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */,
 				03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */,
 				03C9E8AE1FCDC734004A02E8 /* iohelper.c in Sources */,
@@ -301,6 +301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -311,6 +312,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				PRODUCT_NAME = "$(TARGET_NAME)";

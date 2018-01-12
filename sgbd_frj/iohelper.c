@@ -225,7 +225,6 @@ void printTable(const BDD parBdd, const char* parTable)
 	{
 		printf("La table %s n'existe pas dans la bdd\n", parTable);
 	}
-	int j;
 	printf("Table %s a %d elements : \n", parTable, parBdd.sizetable[i]);
 	afficheRELATION(parBdd.data[i]);
 }

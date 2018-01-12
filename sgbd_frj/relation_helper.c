@@ -44,3 +44,35 @@ void afficheRELATION(RELATION r)
 	}
 	printf("================== \n");
 }
+
+NUPLET fullscanNext(const RELATION r, const char* name)
+{
+	static int pos = 0; //va se rapeller entre chaque appel de la fonction de la position
+	static char lastCall[TAILLE_MAX_CHAINE] = "\0"; //va se rappeller entre chaque appel de la fonction du nom de la table
+	
+	if (strcmp(lastCall, name) != 0)
+	{
+		strcpy(lastCall, name);
+		pos = 0;
+	}
+	if (pos > r.size)
+	{
+		printf("Fin de la relation\n");
+		return newErrNUPLET();
+	}
+
+	NUPLET res = newNUPLET(r.attsize);
+	copy(r.ligne[pos], &res);
+	pos++;
+	return res;
+}
+
+
+
+
+
+
+
+
+
+

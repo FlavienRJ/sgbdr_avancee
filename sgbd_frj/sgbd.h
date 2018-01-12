@@ -10,6 +10,10 @@
 #include <stdbool.h>
 #include <string.h>
 
+#define TAILLE_MAX_CHAINE 256
+#define TAILLE_HASH 20
+#define TAILLE_BUCKET 256
+
 /** 
  * @brief 
  * @val : tableau de valeur
@@ -92,4 +96,20 @@ typedef struct bdd
 	int			state;
 	
 } BDD;
+
+typedef struct item_hash
+{
+	int clef;
+	NUPLET data;
+	struct item_hash* next;
+
+} ITEM_HASH;
+
+typedef struct table_hash
+{
+	struct item_hash* 	table[TAILLE_HASH];
+	int				size_table[TAILLE_HASH];
+} TABLE_HASH;
+
+
 

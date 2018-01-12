@@ -366,8 +366,83 @@ RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2)
 	return res;
 }
 
+RELATION OpJointureHash(RELATION r1, RELATION r2, int attr1, int attr2)
+{
+	int i;
+	int j;
+	int k;
+	int l;
+	int maxsize = (r1.sizemax > r2.sizemax) ? r1.sizemax : r2.sizemax;
+	RELATION res = newRELATION((r1.attsize + r2.attsize - 1), maxsize);
+	NUPLET tmp = newNUPLET(r1.attsize + r2.attsize - 1);
+	TABLE_HASH hash_table;
+	for (l = 0; l < TAILLE_HASH; l++)
+	{
+		hash_table.table[l] = NULL;
+		hash_table.size_table[l] = 0;
+	}
 
+	bool r1_plue_petit = (r1.size > r2.size) ? false : true;
+	if(r1_plue_petit)
+	{
+		for (i=0; i<r1.size; i++)
+		{
+			insertHash(&hash_table, r1.ligne[i].val[attr1], r1.ligne[i]);
+		}
+		for (j=0; j < r2.size; j++)
+		{
+			for (k=0; k < hash_table.size_table[hashCode(r2.ligne[j].val[attr1])]; k++)
+			{
+				if (/*r.attr1 = r2.ligne[j].val[attr2]*/)
+				{
+					for (k=0; k < r1.attsize; k++)
+					{
+						set(tmp, k, r1.ligne[i].val[k]);
+					}
+					for (k=0; k < r2.attsize; k++)
+					{
+						if (k != attr2)
+						{
+							set(tmp, k + r1.attsize, r2.ligne[j].val[k]);
+						}
+					}
+					insert(&res, tmp);
+				}
+			}
+		}
+	}
+	else
+	{
+		for (i=0; i<r2.size; i++)
+		{
+			//mettre r2[i] dans le bucket numero hash(r2.attr2)
+		}
+	}
 
+	return res;
+}
+
+int hashCode(const int clef)
+{
+	return clef % TAILLE_HASH;
+}
+
+//On ajoute dans une liste chainée
+void insertHash(TABLE_HASH* hash_table, int clef, NUPLET data)
+{
+	int HashIndex = hashCode(clef);
+	ITEM_HASH * tmp = (ITEM_HASH*)malloc(sizeof(ITEM_HASH));
+	tmp->clef = clef;
+	copy(data, &tmp->data);
+	tmp->next = NULL;
+	ITEM_HASH* i = hash_table->table[HashIndex];
+	while (i->next != NULL)
+	{
+		i = i->next;
+	}
+	i->next = tmp;
+	hash_table->size_table[HashIndex]++;
+}
 
 
 

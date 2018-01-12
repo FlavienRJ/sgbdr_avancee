@@ -10,5 +10,6 @@ void insert(RELATION* r, NUPLET n);
 NUPLET getNUPLET(RELATION r, int ligne);
 int findNuplet(const RELATION r, const int* att);
 void afficheRELATION(RELATION r);
+NUPLET fullscanNext(const RELATION r, const char* name);
 
 #endif

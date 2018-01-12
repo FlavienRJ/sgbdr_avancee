@@ -393,7 +393,8 @@ RELATION OpJointureHash(RELATION r1, RELATION r2, int attr1, int attr2)
 		{
 			for (k=0; k < hash_table.size_table[hashCode(r2.ligne[j].val[attr1])]; k++)
 			{
-				if (/*r.attr1 = r2.ligne[j].val[attr2]*/)
+				/*r.attr1 = r2.ligne[j].val[attr2]*/
+				if (hash_table.table[k]->data.val[attr1] == r2.ligne[j].val[attr2])
 				{
 					for (k=0; k < r1.attsize; k++)
 					{
@@ -415,7 +416,124 @@ RELATION OpJointureHash(RELATION r1, RELATION r2, int attr1, int attr2)
 	{
 		for (i=0; i<r2.size; i++)
 		{
-			//mettre r2[i] dans le bucket numero hash(r2.attr2)
+			insertHash(&hash_table, r2.ligne[i].val[attr1], r2.ligne[i]);
+		}
+		for (j=0; j < r1.size; j++)
+		{
+			for (k=0; k < hash_table.size_table[hashCode(r1.ligne[j].val[attr1])]; k++)
+			{
+				/*r.attr1 = r1.ligne[j].val[attr2]*/
+				if (hash_table.table[k]->data.val[attr1] == r1.ligne[j].val[attr2])
+				{
+					for (k=0; k < r2.attsize; k++)
+					{
+						set(tmp, k, r2.ligne[i].val[k]);
+					}
+					for (k=0; k < r1.attsize; k++)
+					{
+						if (k != attr2)
+						{
+							set(tmp, k + r2.attsize, r1.ligne[j].val[k]);
+						}
+					}
+					insert(&res, tmp);
+				}
+			}
+		}
+	}
+	return res;
+}
+
+
+
+RELATION OpJointureSortMerge(RELATION r1, RELATION r2, int attr1, int attr2)
+{
+	int maxsize = (r1.sizemax > r2.sizemax) ? r1.sizemax : r2.sizemax;
+	RELATION res = newRELATION((r1.attsize + r2.attsize - 1), maxsize);
+	NUPLET tmp = newNUPLET(r1.attsize + r2.attsize - 1);
+
+	//Stage 1 : Tri
+	RELATION r1_trie = insertionSort(r1, attr1);
+	RELATION r2_trie = insertionSort(r2, attr2);
+
+	//Stage 2 : Merge
+	NUPLET tmp1 = r1_trie.ligne[0];
+	NUPLET tmp2 = r2_trie.ligne[0];
+
+	int r = 0;
+	int r_2 = 0;
+	int q = 0;
+	int q_2 = 0;
+
+	int k;
+
+	while (r < r1_trie.size && q < r2_trie.size)
+	{
+		if (tmp1.val[attr1] > tmp2.val[attr2])
+		{
+			q++;
+			tmp2 = r2_trie.ligne[q];
+		}
+		else if (tmp1.val[attr1] < tmp2.val[attr2])
+		{
+			r++;
+			tmp1 = r1_trie.ligne[r];
+		}
+		else
+		{
+			//on met p◦q dans la relation res
+			for (k=0; k < r1.attsize; k++)
+			{
+				set(tmp, k, r1_trie.ligne[r].val[k]);
+			}
+			for (k=0; k < r2.attsize; k++)
+			{
+				if (k != attr2)
+				{
+					set(tmp, k + r1.attsize, r2_trie.ligne[q].val[k]);
+				}
+			}
+			insert(&res, tmp);
+
+
+			q_2 = q++;
+			while (q_2 < r1.size && r1_trie.ligne[r].val[attr1] == r2_trie.ligne[q_2].val[attr2])
+			{
+				for (k=0; k < r1.attsize; k++)
+				{
+					set(tmp, k, r1_trie.ligne[r].val[k]);
+				}
+				for (k=0; k < r2.attsize; k++)
+				{
+					if (k != attr2)
+					{
+						set(tmp, k + r1.attsize, r2_trie.ligne[q_2].val[k]);
+					}
+				}
+				insert(&res, tmp);
+			}
+
+
+			r_2 = r++;
+			while (r_2 < r1.size && r1_trie.ligne[r_2].val[attr1] == r2_trie.ligne[q].val[attr2])
+			{
+				for (k=0; k < r1.attsize; k++)
+				{
+					set(tmp, k, r1_trie.ligne[r_2].val[k]);
+				}
+				for (k=0; k < r2.attsize; k++)
+				{
+					if (k != attr2)
+					{
+						set(tmp, k + r1.attsize, r2_trie.ligne[q].val[k]);
+					}
+				}
+				insert(&res, tmp);
+			}
+
+
+			r++;
+			q++;
 		}
 	}
 
@@ -442,6 +560,35 @@ void insertHash(TABLE_HASH* hash_table, int clef, NUPLET data)
 	}
 	i->next = tmp;
 	hash_table->size_table[HashIndex]++;
+}
+
+RELATION insertionSort(RELATION r, int attr)
+{
+	RELATION res = newRELATION(r.attsize, r.size);
+	res = r; //Pas sûr que cette copie fonctionne
+
+	//On fait le tri avec un insertion sort
+	NUPLET tmp = newNUPLET(r.attsize);
+	int holePosition;
+	int i;
+
+	for (i = 1; i < r.size; i++)
+	{
+		copy(res.ligne[i], &tmp);
+		holePosition = i;
+
+		while (holePosition > 0 && res.ligne[holePosition - 1].val[attr] > tmp.val[attr])
+		{
+			res.ligne[holePosition] = res.ligne[holePosition - 1];
+			holePosition--;
+		}
+
+		if (holePosition != i)
+		{
+			res.ligne[holePosition] = tmp;
+		}
+	}
+	return res;
 }
 
 

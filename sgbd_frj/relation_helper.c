@@ -27,6 +27,20 @@ void insert (RELATION* r, NUPLET n)
 	}
 }
 
+void insertPos(RELATION* r, NUPLET n, int pos)
+{
+	int i;
+	if((r->size < r->sizemax) && (compatible(*r,n)==1) && pos > 0 && pos < (r->size + 1))
+	{
+		for (i = r->size; i > pos; i++)
+		{
+			r->ligne[i] = r->ligne[i-1];
+		}
+		r->ligne[pos] = n;
+		r->size++;
+	}
+}
+
 NUPLET getNUPLET(RELATION r, int ligne)
 {
 	if(ligne < r.size)

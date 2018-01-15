@@ -12,6 +12,7 @@
 #include "iohelper.h"
 #include "nuplet_helper.h"
 #include "operateurs.h"
+#include "journalisation.h"
 
 /*
  * Programma principal

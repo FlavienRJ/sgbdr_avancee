@@ -25,15 +25,16 @@
 - Ajouter un fichier journal pour le log des opérations sur la bdd avec enregistrement systematique
 
 ### D'après le TP
-- fonction OpUnion : OK
-- fonction operateur restriction : OK
-- fonction operateur produit cartésien : OK
-- different operateur de jointure HashJoin et SortMergeJoin :
+- fonction OpUnion : A tester
+- fonction operateur restriction : A tester
+- fonction operateur produit cartésien : A tester
+- different operateur de jointure HashJoin et SortMergeJoin : A tester
 - Parser de requete de l'algebre relationnelle :
-- Fonction fullscan : OK
-- Insert, delete update dans une table : OK
+- Fonction fullscan : A tester
+- Insert, delete update dans une table : A tester
 - Optimiser les accès disque avec un index sur la table
 - Transaction et optimisation
+- Journalisation des requetes
 
 
 

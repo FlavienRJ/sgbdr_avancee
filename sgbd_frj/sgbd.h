@@ -111,5 +111,13 @@ typedef struct table_hash
 	int				size_table[TAILLE_HASH];
 } TABLE_HASH;
 
+typedef struct journal
+{
+	FILE* 	fp;
+	char* 	path;
+	int		state; //0 = erreur à la lecture, 1= ouverture du fichier reussi
+
+} JOURNAL;
+
 
 

@@ -11,6 +11,7 @@
 		038327341FF3A19100D90D7A /* relation_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 038327331FF3A19100D90D7A /* relation_helper.c */; };
 		03C636E01FE921510075A3FC /* nuplet_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C636DF1FE921510075A3FC /* nuplet_helper.c */; };
 		03C7515A200D3C92000475D3 /* journalisation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C75159200D3C92000475D3 /* journalisation.c */; };
+		03C7515D200D4D5B000475D3 /* indexation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C7515C200D4D5B000475D3 /* indexation.c */; };
 		03C9E89C1FCDC531004A02E8 /* parsing.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89B1FCDC531004A02E8 /* parsing.c */; };
 		03C9E89F1FCDC5CE004A02E8 /* operateurs.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89E1FCDC5CE004A02E8 /* operateurs.c */; };
 		03C9E8A21FCDC606004A02E8 /* table.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A11FCDC606004A02E8 /* table.c */; };
@@ -43,6 +44,8 @@
 		03C636DF1FE921510075A3FC /* nuplet_helper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = nuplet_helper.c; sourceTree = "<group>"; };
 		03C75158200D3C92000475D3 /* journalisation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = journalisation.h; sourceTree = "<group>"; };
 		03C75159200D3C92000475D3 /* journalisation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = journalisation.c; sourceTree = "<group>"; };
+		03C7515B200D4D5B000475D3 /* indexation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = indexation.h; sourceTree = "<group>"; };
+		03C7515C200D4D5B000475D3 /* indexation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = indexation.c; sourceTree = "<group>"; };
 		03C9E89A1FCDC531004A02E8 /* parsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parsing.h; sourceTree = "<group>"; };
 		03C9E89B1FCDC531004A02E8 /* parsing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parsing.c; sourceTree = "<group>"; };
 		03C9E89D1FCDC5CE004A02E8 /* operateurs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = operateurs.h; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				0361C53E1FFE89690091D459 /* README.md */,
 				03C75158200D3C92000475D3 /* journalisation.h */,
 				03C75159200D3C92000475D3 /* journalisation.c */,
+				03C7515B200D4D5B000475D3 /* indexation.h */,
+				03C7515C200D4D5B000475D3 /* indexation.c */,
 			);
 			path = sgbd_frj;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C7515D200D4D5B000475D3 /* indexation.c in Sources */,
 				03C636E01FE921510075A3FC /* nuplet_helper.c in Sources */,
 				03C9E8A21FCDC606004A02E8 /* table.c in Sources */,
 				03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */,

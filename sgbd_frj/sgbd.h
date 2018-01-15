@@ -26,6 +26,14 @@ typedef struct nuplet
 	
 } NUPLET;
 
+typedef struct nuplet_index
+{
+	int 		index;
+	int* 		val;
+	int 		size;
+
+} NUPLET_INDEX;
+
 /** 
  * @brief
  * @ligne : un tableau de NUPLET, lignes  
@@ -41,6 +49,16 @@ typedef struct relation
 	int 		sizemax;
 	
 } RELATION;
+
+typedef struct relation_index
+{
+
+	NUPLET_INDEX* 	ligne;
+	int 			attsize;
+	int 			size;
+	int 			sizemax;
+
+} RELATION_INDEX;
 
 /** 
  * @brief  Liste des operateurs autorisés

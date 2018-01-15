@@ -2,7 +2,7 @@
 //  journalisation.h
 //  sgbd_frj
 //
-//  Created by Flavien Ronteix--jacquet on 15/01/2018.
+//  Created by Flavien Ronteix--jacquet on 13/01/2018.
 //  Copyright © 2018 frj. All rights reserved.
 //
 

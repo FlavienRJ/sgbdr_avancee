@@ -34,7 +34,7 @@
 - Insert, delete update dans une table : A tester
 - Optimiser les accès disque avec un index sur la table
 - Transaction et optimisation
-- Journalisation des requetes
+- Journalisation des requetes : A tester
 
 
 

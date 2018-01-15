@@ -127,7 +127,6 @@ int closeBDD(BDD* parBDD)
 int store(BDD* parBdd, const char* parTable, int parPos, NUPLET parVal)
 {
 	int i;
-	int j;
 	
 	if ((i = tableDansBdd(*parBdd, parTable)) < 0)
 	{

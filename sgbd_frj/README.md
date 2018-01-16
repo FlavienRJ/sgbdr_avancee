@@ -8,8 +8,8 @@
 - Execution de transaction :
 - 1 seule transactio à la fois dans un premier temps donc pas besoin de tester la seriabilisabilité
 - On peut faire de l'estampillage
-- Verrouillage avec S et X sur les Nuplets
-- Indexation sur le fichier
+- Verrouillage avec S et X sur les Nuplets : Camille
+- Indexation sur le fichier : En cours
 - Arbre-B pour la gestion des données
 - Flemme de faire du hashage
 - Parser de requête SQL
@@ -17,7 +17,7 @@
 - Conversion en plan d'execution physique
 - Optimisation, c'est trop compliqué
 - Operateur en mode naïf, à convertir en mode pipelinage
-- Faire du tri dans la table (order by)
+- Faire du tri dans la table (order by) : En cours
 - Jointure par hachage plutot que jointure naturelle
 - Modele de controle d'acces DAC entre des utilisateurs et des objets
 - Different niveau d'utilisateur, MAC multiniveau
@@ -25,16 +25,17 @@
 - Ajouter un fichier journal pour le log des opérations sur la bdd avec enregistrement systematique
 
 ### D'après le TP
-- fonction OpUnion : A tester
-- fonction operateur restriction : A tester
-- fonction operateur produit cartésien : A tester
+- fonction OpUnion : OK
+- fonction operateur restriction : OK
+- fonction operateur produit cartésien : OK
 - different operateur de jointure HashJoin et SortMergeJoin : A tester
 - Parser de requete de l'algebre relationnelle :
-- Fonction fullscan : A tester
+- Fonction fullscan : OK
 - Insert, delete update dans une table : A tester
+- Indexation dans les tables et le fichier : En cours
 - Optimiser les accès disque avec un index sur la table
 - Transaction et optimisation
-- Journalisation des requetes : A tester
+- Journalisation des requetes : OK
 
 
 

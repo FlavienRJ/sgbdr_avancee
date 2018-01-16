@@ -9,7 +9,7 @@
 #include "operateurs.h"
 
 /** 
- * @brief  operation d'UNION
+ * @brief  operation d'UNION OK
  * @note  SELECT * FROM r1 UNION SELECT * FROM r2; 
  * @param  r1: 
  * @param  r2: 
@@ -34,7 +34,7 @@ RELATION OpUnion(RELATION r1, RELATION r2)
 }
 
 /** 
- * @brief  operation Intersection
+ * @brief  operation Intersection PRESQUE
  * @note   SELECT * FROM r1 INTERSECT SELECT * FROM r2;
  * @param  r1: 
  * @param  r2: 
@@ -81,7 +81,7 @@ RELATION OpInter(RELATION r1, RELATION r2)
 }
 
 /** 
- * @brief  Operateur de Restriction pour une valeur fixe
+ * @brief  Operateur de Restriction pour une valeur fixe OK
  * @note   SELECT * FROM r1 WHERE r1.att operateur(<,=,...) valeur
  * @param  r1: 
  * @param  att: 
@@ -100,13 +100,14 @@ RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 		return err;
 	}
 	RELATION res = newRELATION(r1.attsize, r1.size);
-	NUPLET tmp = newNUPLET(r1.attsize);
+
 	switch (operateur)
 	{
 	    //Operateur "=="
 		case 0:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att] == valeur)
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -122,6 +123,7 @@ RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 		case 1:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att] < valeur)
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -137,6 +139,7 @@ RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 		case 2:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att] > valeur)
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -152,6 +155,7 @@ RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 		case 3:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att] != valeur)
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -172,7 +176,7 @@ RELATION OpRestrictionCST(RELATION r1, int att, int operateur, int valeur)
 }
 
 /** 
- * @brief  Operateur de Restriction pour une valeur variable
+ * @brief  Operateur de Restriction pour une valeur variable OK
  * @note   SELECT * FROM r1 WHERE r1.att operateur(<,=,...) r1.att2
  * @param  r1: 
  * @param  att1: 
@@ -191,13 +195,14 @@ RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 		return err;
 	}
 	RELATION res = newRELATION(r1.attsize, r1.size);
-	NUPLET tmp = newNUPLET(r1.attsize);
+
 	switch (operateur)
 	{
 			//Operateur "=="
 		case 0:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att1] == r1.ligne[i].val[att2])
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -213,6 +218,7 @@ RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 		case 1:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att1] < r1.ligne[i].val[att2])
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -228,6 +234,7 @@ RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 		case 2:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att1] > r1.ligne[i].val[att2])
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -243,6 +250,7 @@ RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 		case 3:
 			for (i=0; i < r1.size; i++)
 			{
+				NUPLET tmp = newNUPLET(r1.attsize);
 				if (r1.ligne[i].val[att1] != r1.ligne[i].val[att2])
 				{
 					for (j=0; j < r1.attsize; j++)
@@ -263,7 +271,7 @@ RELATION OpRestrictionATT(RELATION r1, int att1, int operateur, int att2)
 }
 
 /** 
- * @brief  Operateur de projection
+ * @brief  Operateur de projection OK
  * @note   SELECT attributs FROM r1;
  * @param  r1: 
  * @param  attributs: 
@@ -275,9 +283,10 @@ RELATION OpProjection(RELATION r1, int* attributs, int taille)
 	int i;
 	int j;
 	RELATION res = newRELATION(taille, r1.sizemax);
-	NUPLET tmp = newNUPLET(taille);
+
 	for (i=0; i < r1.size; i++)
 	{
+		NUPLET tmp = newNUPLET(taille);
 		for (j=0; j < taille; j++)
 		{
 			set(tmp, j, get(getNUPLET(r1, i), attributs[j]));
@@ -288,7 +297,7 @@ RELATION OpProjection(RELATION r1, int* attributs, int taille)
 }
 
 /** 
- * @brief  Operateur de produit cartesien
+ * @brief  Operateur de produit cartesien OK
  * @note   SELECT * FROM r1,r2;
  * @param  r1: 
  * @param  r2: 
@@ -301,10 +310,10 @@ RELATION OpProduitCartesien(RELATION r1, RELATION r2)
 	int k;
 	int l;
 	RELATION res = newRELATION((r1.attsize + r2.attsize), (r1.size*r2.size));
-	NUPLET tmp = newNUPLET(r1.attsize + r2.attsize);
 	
 	for (i=0; i < r2.size; i++)
 	{
+		NUPLET tmp = newNUPLET(r1.attsize + r2.attsize);
 		for (k=0; k < r2.attsize; k++)
 		{
 			//On set les attributs de la relation r2
@@ -318,14 +327,15 @@ RELATION OpProduitCartesien(RELATION r1, RELATION r2)
 				//on set les attibuts de la relation r1
 				set(tmp, l, get(getNUPLET(r1, j), l));
 			}
-			insert(&res, tmp);
+
 		}
+		insert(&res, tmp);
 	}
 	return res;
 }
 
 /** 
- * @brief  Operateur de jointure entre 2 relations
+ * @brief  Operateur de jointure entre 2 relations PRESQUE
  * @note   SELECT * FROM r1, r2 WHERE r1.attr1 = r2.attr2;
  * @param  r1: 
  * @param  r2: 
@@ -340,12 +350,13 @@ RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2)
 	int k;
 	int maxsize = (r1.sizemax > r2.sizemax) ? r1.sizemax : r2.sizemax;
 	RELATION res = newRELATION((r1.attsize + r2.attsize - 1), maxsize);
-	NUPLET tmp = newNUPLET(r1.attsize + r2.attsize - 1);
+
 	
 	for (i=0; i < r1.size; i++)
 	{
 		for (j=0; j < r2.size; j++)
 		{
+			NUPLET tmp = newNUPLET(r1.attsize + r2.attsize - 1);
 			if (r1.ligne[i].val[attr1] == r2.ligne[j].val[attr2])
 			{
 				for (k=0; k < r1.attsize; k++)

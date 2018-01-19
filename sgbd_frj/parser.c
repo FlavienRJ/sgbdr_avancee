@@ -1,5 +1,11 @@
 #include "parser.h"
 
+//COMMIT INSERT DELETE UPDATE
+//Modifier l'appel à OpJointure
+//Faire disjonction de cas OpRestriction
+//Rajouter chaque requête dans le journal
+//Affiner la fonction de test
+
 void filter(char* src)
 {
     int i=0;
@@ -22,7 +28,7 @@ void filter(char* src)
 RELATION parser(int argc, char **argv, BDD* bdd)
 {
     int r,i,n;
-    int selectnb=0,fromnb=0,wherenb=0,unionnb=0,unionps=0,intersectnb=0,intersectps=0;
+    int selectnb=0,fromnb=0,wherenb=0,unionnb=0,unionps=0,intersectnb=0,intersectps=0,insertnb=0,insertps=0,updatenb=0,updateps=0,deletenb=0,deleteps=0,commitnb=0,commitps=0;
     int selectps[2], fromps[2], whereps[2];
     RELATION r1, r2;
     regex_t reg;
@@ -31,7 +37,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
     r = regcomp(&reg, "SELECT", REG_NOSUB|REG_EXTENDED);
     for(i=1;i<argc;i++)
     {
-        filter(argv[i]);
+        //filter(argv[i]);
         r = regcomp(&reg, "SELECT", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
@@ -63,6 +69,30 @@ RELATION parser(int argc, char **argv, BDD* bdd)
             intersectps=i;
             intersectnb++;
         }
+        r = regcomp(&reg, "INSERT", REG_NOSUB|REG_EXTENDED);
+        if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
+        {
+            insertps=i;
+            insertnb++;
+        }
+        r = regcomp(&reg, "UPDATE", REG_NOSUB|REG_EXTENDED);
+        if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
+        {
+            updateps=i;
+            updatenb++;
+        }
+        r = regcomp(&reg, "DELETE", REG_NOSUB|REG_EXTENDED);
+        if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
+        {
+            deleteps=i;
+            deletenb++;
+        }
+        r = regcomp(&reg, "COMMIT", REG_NOSUB|REG_EXTENDED);
+        if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
+        {
+            commitps=i;
+            commitnb++;
+        }
     }
     
     //printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,selectps[0],fromps[0],whereps[0]);
@@ -84,19 +114,26 @@ RELATION parser(int argc, char **argv, BDD* bdd)
             {
                 if(wherenb==i&&(whereps[i-1]-fromps[i-1])==3)
                 {
-                    r2=OpJointure(argv[fromps[i-1]+1],argv[fromps[i-1]+2],argv[whereps[i-1]+1],argv[whereps[i-1]+3]);
+                    r2=OpJointure(filter(argv[fromps[i-1]+1]),filter(argv[fromps[i-1]+2]),filter(argv[whereps[i-1]+1]),filter(argv[whereps[i-1]+3]));
                 }
                 if(wherenb==1&&(whereps[i-1]-fromps[i-1])==2)
                 {
-                    r2=OpRestriction(argv[fromps[i-1]+1],argv[whereps[i-1]+1],argv[whereps[i-1]+2],argv[whereps[i-1]+3]);
+                    if(isdigit(*argv[whereps[i-1]+3]))
+                    {
+                        r2=OpRestrictionCST(filter(argv[fromps[i-1]+1]),filter(argv[whereps[i-1]+1]),argv[whereps[i-1]+2],filter(argv[whereps[i-1]+3]));
+                    }
+                    else
+                    {
+                        r2=OpRestrictionATT(filter(argv[fromps[i-1]+1]),filter(argv[whereps[i-1]+1]),argv[whereps[i-1]+2],filter(argv[whereps[i-1]+3]));
+                    }
                 }
                 if(wherenb==0&&(argc-fromps[i-1])==3)
                 {
-                    r2=OpProduitCartesien(argv[fromps[i-1]+1],argv[fromps[i-1]+2]);
+                    r2=OpProduitCartesien(filter(argv[fromps[i-1]+1]),filter(argv[fromps[i-1]+2]));
                 }
                 if(wherenb==0&&(argc-fromps[i-1])==2)
                 {
-                    r2=OpProjection(argv[selectps[i-1]+1],argv[fromps[i-1]+1]);
+                    r2=OpProjection(filter(argv[selectps[i-1]+1]),filter(argv[fromps[i-1]+1]));
                 }
             }
             if(i=1)r1=r2;

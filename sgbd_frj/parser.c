@@ -40,7 +40,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
     int selectps[2], fromps[2], whereps[2];
     RELATION r1, r2;
     regex_t reg;
-
+    
     //LEXING
     r = regcomp(&reg, "SELECT", REG_NOSUB|REG_EXTENDED);
     for(i=1;i<argc;i++)
@@ -103,11 +103,10 @@ RELATION parser(int argc, char **argv, BDD* bdd)
         }
     }
     
-    //printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,selectps[0],fromps[0],whereps[0]);
-    
+    printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,selectps[0],fromps[0],whereps[0]);
     //PARSING
     
-    if((selectnb==0)||(selectnb!=fromnb)||(selectnb!=(unionnb+1||intersectnb+1))||((unionnb==intersectnb)&&unionnb==1)||(!isdigit(argv[fromps[0]+1])))
+    if((selectnb==0)||(selectnb!=fromnb)||(selectnb!=(unionnb+1||intersectnb+1))||((unionnb==intersectnb)&&unionnb==1)/*||(!isdigit(*argv[fromps[0]+1]))*/)
     {
         printf("SQL request not coherent enough\n");
     }
@@ -134,7 +133,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
                     filter(argv[whereps[i-1]+1]);
                     filter(argv[whereps[i-1]+2]);//A enlever plus tard
                     filter(argv[whereps[i-1]+3]);
-                    if(isdigit(*argv[whereps[i-1]+3]))
+                    if(/*isdigit(*argv[whereps[i-1]+3])*/1)
                     {
                         
                         r2=OpRestrictionCST(stringtoRELATION(argv[fromps[i-1]+1],bdd),atoi(argv[whereps[i-1]+1]),atoi(argv[whereps[i-1]+2]),atoi(argv[whereps[i-1]+3]));

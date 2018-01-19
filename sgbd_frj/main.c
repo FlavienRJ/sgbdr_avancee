@@ -21,7 +21,8 @@
  */
 int main(int argc, char **argv)
 {
-    BDD* bdd = newBDD();;
+    BDD* bdd = newBDD();
+    bdd->data=(RELATION*)malloc(sizeof(RELATION)*10);
     
 	//printf("Creation d'un nuplet.");
 	NUPLET n = newNUPLET(3);
@@ -81,11 +82,8 @@ int main(int argc, char **argv)
 
 	printf("Operateur Jointure\n");
 	afficheRELATION(OpJointure(res, q, 1, 1));
-
-    
-    RELATION input;
-    input = parser(argc, argv, bdd);
-    afficheRELATION(input);
+   
+    afficheRELATION(parser(argc, argv, bdd));
     
     
 

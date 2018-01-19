@@ -33,17 +33,18 @@ int main(int argc, char **argv)
 	//afficheNUPLET(n);
 	//printf("Creation d'une relation.");
     
-	RELATION p = newRELATION(3, 10);
-    bdd->data[0]=p;
-	insert(&p, n);
+	//RELATION
+	bdd->data[0] = newRELATION(3, 10);
+    //bdd->data[0]=p;
+	insert(&bdd->data[0], n);
 	//printf("\n");
-	//afficheRELATION(p);
+	//afficheRELATION(bdd->data[0]);
 	
 	NUPLET n2 = newNUPLET(3);
 	set(n2, 0, 2);
 	set(n2, 1, 42);
 	set(n2, 2, -15);
-	insert(&p, n2);
+	insert(&bdd->data[0], n2);
 	//printf("\n");
 	//afficheNUPLET(n2);
 	
@@ -56,32 +57,30 @@ int main(int argc, char **argv)
 	//afficheNUPLET(n3);
 	
 	
-	RELATION q = newRELATION(3, 10);
-    bdd->data[1]=q;
-	insert(&q, n3);
+	bdd->data[1] = newRELATION(3, 10);
+	insert(&bdd->data[1], n3);
 
-	RELATION r = newRELATION(3, 10);
-    bdd->data[2]=r;
-	insert(&r, n3);
+	bdd->data[2] = newRELATION(3, 10);
+	insert(&bdd->data[2], n3);
 	
-	RELATION res = OpUnion(q, p);
-	afficheRELATION(res);
+	bdd->data[3] = OpUnion(bdd->data[1], bdd->data[0]);
+	afficheRELATION(bdd->data[3]);
 
 	printf("Operateur de projection\n");
 	int attr[2] = {0, 2};
-	afficheRELATION(OpProjection(res, attr, 2));
+	afficheRELATION(OpProjection(bdd->data[3], attr, 2));
 
 	printf("Operateur cartesien\n");
-	afficheRELATION(OpProduitCartesien(q, res));
+	afficheRELATION(OpProduitCartesien(bdd->data[1], bdd->data[3]));
 
 	printf("Operateur Intersection\n");
-	afficheRELATION(OpProduitCartesien(q, r));
+	afficheRELATION(OpProduitCartesien(bdd->data[1], bdd->data[2]));
 
 	printf("Operateur Restriction constant\n");
-	afficheRELATION(OpRestrictionCST(p, 1, 0, 42));
+	afficheRELATION(OpRestrictionCST(bdd->data[0], 1, 0, 42));
 
 	printf("Operateur Jointure\n");
-	afficheRELATION(OpJointure(res, q, 1, 1));
+	afficheRELATION(OpJointure(bdd->data[3], bdd->data[1], 1, 1));
    
     afficheRELATION(parser(argc, argv, bdd));
     

@@ -24,13 +24,9 @@ void filter(char* src)
     src[i]='\0';
 }
 
-RELATION stringtoRELATION(char* s, BDD* bdd)
+RELATION stR(char* s, BDD* bdd)
 {
-    int tmp;
-    RELATION rtmp;
-    tmp=atoi(s);
-    rtmp=bdd->data[tmp];
-    return rtmp;
+    return bdd->data[atoi(s)];
 }
 
 RELATION parser(int argc, char **argv, BDD* bdd)
@@ -110,7 +106,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
         }
     }
     
-    //printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,selectps[0],fromps[0],whereps[0]);
+    printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,select[0].argc,from[0].argc,where[0].argc);
     //PARSING
     
     if((selectnb==0)||(selectnb!=fromnb)||(selectnb!=(unionnb+1||intersectnb+1))||((unionnb==intersectnb)&&unionnb==1)/*||(!isdigit(*argv[fromps[0]+1]))*/)
@@ -131,11 +127,24 @@ RELATION parser(int argc, char **argv, BDD* bdd)
         }
         for(i=0;i<fromnb;i++)
         {
+            n=from[i].argc;
             from[i].argc=where[i].argc-from[i].argc-1;
-            from[i].argv=(char**)malloc(sizeof(char**)*from[i].argc);
-            for(j=0;j<from[i].argc;j++)
+            if(from[i].argc<=0)
             {
-                from[i].argv[j]=argv[where[i].argc-from[i].argc+j];
+                from[i].argc=argc-n-1;
+                from[i].argv=(char**)malloc(sizeof(char**)*from[i].argc);
+                for(j=0;j<from[i].argc;j++)
+                {
+                    from[i].argv[j]=argv[argc-from[i].argc+j];
+                }
+            }
+            else
+            {
+                from[i].argv=(char**)malloc(sizeof(char**)*(from[i].argc));
+                for(j=0;j<from[i].argc;j++)
+                {
+                    from[i].argv[j]=argv[where[i].argc-from[i].argc+j];
+                }
             }
         }
         for(i=0;i<wherenb;i++)
@@ -149,6 +158,9 @@ RELATION parser(int argc, char **argv, BDD* bdd)
             }
         }
         
+        printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,select[0].argc,from[0].argc,where[0].argc);
+        
+        
         //Calling everything like it should
         n=2;
         if(unionnb==1||intersectnb==1)n++;
@@ -159,38 +171,39 @@ RELATION parser(int argc, char **argv, BDD* bdd)
             {
                 if(wherenb==i+1&&from[i].argc==2)
                 {
-                    r2=newRELATION((stringtoRELATION(from[i].argv[0],bdd).attsize + stringtoRELATION(from[i].argv[1],bdd).attsize - 1), (stringtoRELATION(from[i].argv[0],bdd).sizemax > stringtoRELATION(from[i].argv[1],bdd).sizemax) ? stringtoRELATION(from[i].argv[0],bdd).sizemax : stringtoRELATION(from[i].argv[1],bdd).sizemax);
-                    r2=OpJointure(stringtoRELATION(from[i].argv[0],bdd),stringtoRELATION(from[i].argv[1],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[1]));
+                    r2=newRELATION((stR(from[i].argv[0],bdd).attsize + stR(from[i].argv[1],bdd).attsize - 1), (stR(from[i].argv[0],bdd).sizemax > stR(from[i].argv[1],bdd).sizemax) ? stR(from[i].argv[0],bdd).sizemax : stR(from[i].argv[1],bdd).sizemax);
+                    //printf("%s,%s,%i,%i\n",from[i].argv[0],from[i].argv[1],atoi(where[i].argv[0]),atoi(where[i].argv[1]));
+                    r2=OpJointure(stR(from[i].argv[0],bdd),stR(from[i].argv[1],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[2]));
                 }
                 if(wherenb==1&&from[i].argc==1)
                 {
-                    if(/*isdigit(*argv[whereps[i-1]+3])*/1)
+                    if(isdigit(*where[i].argv[2]))
                     {
                         printf("%s,%i,%i,%i\n",from[i].argv[0],atoi(where[i].argv[0]),atoi(where[i].argv[1]),atoi(where[i].argv[2]));
-                        r2 = newRELATION(stringtoRELATION(from[i].argv[0],bdd).attsize, stringtoRELATION(from[i].argv[0],bdd).sizemax);
-                        r2=OpRestrictionCST(stringtoRELATION(from[i].argv[0],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[1]),atoi(where[i].argv[2]));
+                        r2 = newRELATION(bdd->data[atoi(from[i].argv[0])].attsize, bdd->data[atoi(from[i].argv[0])].sizemax);
+                        r2=OpRestrictionCST(stR(from[i].argv[0],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[1]),atoi(where[i].argv[2]));
                     }
                     else
                     {
-                        r2 = newRELATION(stringtoRELATION(from[i].argv[0],bdd).attsize, stringtoRELATION(from[i].argv[0],bdd).sizemax);
-                        r2=OpRestrictionATT(stringtoRELATION(from[i].argv[0],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[1]),atoi(where[i].argv[2]));
+                        r2 = newRELATION(bdd->data[atoi(from[i].argv[0])].attsize, bdd->data[atoi(from[i].argv[0])].sizemax);
+                        r2=OpRestrictionCST(stR(from[i].argv[0],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[1]),atoi(where[i].argv[2]));
                     }
                 }
                 if(wherenb==0&&from[i].argc==2)
                 {
-                    r2 = newRELATION((stringtoRELATION(from[i].argv[0],bdd).attsize+stringtoRELATION(from[i].argv[1],bdd).attsize),stringtoRELATION(from[i].argv[0],bdd).size*stringtoRELATION(from[i].argv[1],bdd).size);
-                    r2=OpProduitCartesien(stringtoRELATION(from[i].argv[0],bdd),stringtoRELATION(from[i].argv[1],bdd));
+                    r2 = newRELATION((stR(from[i].argv[0],bdd).attsize+stR(from[i].argv[1],bdd).attsize),stR(from[i].argv[0],bdd).size*stR(from[i].argv[1],bdd).size);
+                    r2=OpProduitCartesien(stR(from[i].argv[0],bdd),stR(from[i].argv[1],bdd));
                 }
                 if(wherenb==0&&from[i].argc==1)
                 {
                     int* tab;
                     tab=(int*)malloc(sizeof(int*)*select[i].argc);
-                    for(j=0;j<select[i].argc;i++)
+                    for(j=0;j<select[i].argc;j++)
                     {
                         tab[j]=atoi(select[i].argv[j]);
                     }
-                    r2 = newRELATION(stringtoRELATION(from[i].argv[0],bdd).attsize, stringtoRELATION(from[i].argv[0],bdd).sizemax);
-                    r2=OpProjection(stringtoRELATION(from[i].argv[0],bdd),tab,select[i].argc);
+                    r2 = newRELATION(select[i].argc, stR(from[i].argv[0],bdd).sizemax);
+                    r2=OpProjection(stR(from[i].argv[0],bdd),tab,select[i].argc);
                 }
             }
             if(i=1)r1=r2;
@@ -209,5 +222,5 @@ RELATION parser(int argc, char **argv, BDD* bdd)
         
     }
     regfree(&reg);
-    return r1;
+    return r2;
 }

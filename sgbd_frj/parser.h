@@ -17,7 +17,7 @@
 
 void filter(char* src);
 RELATION parser(int argc, char **argv, BDD* bdd);
-RELATION stringtoRELATION(char* s, BDD* bdd);
+RELATION stR(char* s, BDD* bdd);
 
 #endif /* parser_h */
 

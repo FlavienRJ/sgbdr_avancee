@@ -13,6 +13,7 @@
 #include "nuplet_helper.h"
 #include "operateurs.h"
 #include "journalisation.h"
+#include "parser.h"
 
 /*
  * Programma principal
@@ -20,6 +21,8 @@
  */
 int main(int argc, char **argv)
 {
+    BDD* bdd = newBDD();;
+    
 	//printf("Creation d'un nuplet.");
 	NUPLET n = newNUPLET(3);
 	set(n, 0, 1);
@@ -28,7 +31,9 @@ int main(int argc, char **argv)
 	printf("\n");
 	//afficheNUPLET(n);
 	//printf("Creation d'une relation.");
+    
 	RELATION p = newRELATION(3, 10);
+    bdd->data[0]=p;
 	insert(&p, n);
 	//printf("\n");
 	//afficheRELATION(p);
@@ -51,9 +56,11 @@ int main(int argc, char **argv)
 	
 	
 	RELATION q = newRELATION(3, 10);
+    bdd->data[1]=q;
 	insert(&q, n3);
 
 	RELATION r = newRELATION(3, 10);
+    bdd->data[2]=r;
 	insert(&r, n3);
 	
 	RELATION res = OpUnion(q, p);
@@ -74,6 +81,13 @@ int main(int argc, char **argv)
 
 	printf("Operateur Jointure\n");
 	afficheRELATION(OpJointure(res, q, 1, 1));
+
+    
+    RELATION input;
+    input = parser(argc, argv, bdd);
+    afficheRELATION(input);
+    
+    
 
 	
 	return 0;

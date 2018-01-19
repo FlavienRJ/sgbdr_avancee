@@ -24,6 +24,14 @@ void filter(char* src)
     src[i]='\0';
 }
 
+RELATION stringtoRELATION(char* s, BDD* bdd)
+{
+    int tmp;
+    RELATION rtmp;
+    tmp=atoi(s);
+    rtmp=bdd->data[tmp];
+    return rtmp;
+}
 
 RELATION parser(int argc, char **argv, BDD* bdd)
 {
@@ -99,7 +107,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
     
     //PARSING
     
-    if((selectnb==0)||(selectnb!=fromnb)||(selectnb!=(unionnb+1||intersectnb+1))||((unionnb==intersectnb)&&unionnb==1))
+    if((selectnb==0)||(selectnb!=fromnb)||(selectnb!=(unionnb+1||intersectnb+1))||((unionnb==intersectnb)&&unionnb==1)||(!isdigit(argv[fromps[0]+1])))
     {
         printf("SQL request not coherent enough\n");
     }
@@ -114,27 +122,38 @@ RELATION parser(int argc, char **argv, BDD* bdd)
             {
                 if(wherenb==i&&(whereps[i-1]-fromps[i-1])==3)
                 {
-                    r2=OpJointure(filter(argv[fromps[i-1]+1]),filter(argv[fromps[i-1]+2]),filter(argv[whereps[i-1]+1]),filter(argv[whereps[i-1]+3]));
+                    filter(argv[fromps[i-1]+1]);
+                    filter(argv[fromps[i-1]+2]);
+                    filter(argv[whereps[i-1]+1]);
+                    filter(argv[whereps[i-1]+3]);
+                    r2=OpJointure(stringtoRELATION(argv[fromps[i-1]+1],bdd),stringtoRELATION(argv[fromps[i-1]+2],bdd),atoi(argv[whereps[i-1]+1]),atoi(argv[whereps[i-1]+3]));
                 }
                 if(wherenb==1&&(whereps[i-1]-fromps[i-1])==2)
                 {
+                    filter(argv[fromps[i-1]+1]);
+                    filter(argv[whereps[i-1]+1]);
+                    filter(argv[whereps[i-1]+2]);//A enlever plus tard
+                    filter(argv[whereps[i-1]+3]);
                     if(isdigit(*argv[whereps[i-1]+3]))
                     {
-                        r2=OpRestrictionCST(filter(argv[fromps[i-1]+1]),filter(argv[whereps[i-1]+1]),argv[whereps[i-1]+2],filter(argv[whereps[i-1]+3]));
+                        
+                        r2=OpRestrictionCST(stringtoRELATION(argv[fromps[i-1]+1],bdd),atoi(argv[whereps[i-1]+1]),atoi(argv[whereps[i-1]+2]),atoi(argv[whereps[i-1]+3]));
                     }
                     else
                     {
-                        r2=OpRestrictionATT(filter(argv[fromps[i-1]+1]),filter(argv[whereps[i-1]+1]),argv[whereps[i-1]+2],filter(argv[whereps[i-1]+3]));
+                        r2=OpRestrictionATT(stringtoRELATION(argv[fromps[i-1]+1],bdd),atoi(argv[whereps[i-1]+1]),atoi(argv[whereps[i-1]+2]),atoi(argv[whereps[i-1]+3]));
                     }
                 }
                 if(wherenb==0&&(argc-fromps[i-1])==3)
                 {
-                    r2=OpProduitCartesien(filter(argv[fromps[i-1]+1]),filter(argv[fromps[i-1]+2]));
+                    filter(argv[fromps[i-1]+1]);
+                    filter(argv[fromps[i-1]+2]);
+                    r2=OpProduitCartesien(stringtoRELATION(argv[fromps[i-1]+1],bdd),stringtoRELATION(argv[fromps[i-1]+2],bdd));
                 }
-                if(wherenb==0&&(argc-fromps[i-1])==2)
+                /*if(wherenb==0&&(argc-fromps[i-1])==2)
                 {
-                    r2=OpProjection(filter(argv[selectps[i-1]+1]),filter(argv[fromps[i-1]+1]));
-                }
+                    r2=OpProjection(stringtoRELATION(filter(argv[selectps[i-1]+1]),bdd),filter(argv[fromps[i-1]+1]));
+                }*/
             }
             if(i=1)r1=r2;
         }

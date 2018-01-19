@@ -65,7 +65,7 @@ typedef struct relation_index
  */
 typedef enum operateur
 {
-	UNION, INTERSECT, WHERE, SELECT, PRODUCT, JOIN
+	FROM, UNION, INTERSECT, WHERE, SELECT, PRODUCT, JOIN
 	
 } OPERATEUR;
 
@@ -78,8 +78,8 @@ typedef enum operateur
 typedef struct operation
 {
 	OPERATEUR 	op;
-	char*		argc;
-	int			argv;
+	char**		argv;
+	int			argc;
 	
 } OPERATION;
 

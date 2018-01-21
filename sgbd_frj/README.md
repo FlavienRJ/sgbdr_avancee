@@ -1,4 +1,4 @@
-# Documentation de mon SGBD
+# Documentation du SGBD
 ## Cours de SGBD avancée M. Nguyen INSA
 ### Ronteix--Jacquet Flavien
 ### Bertuglia Camille

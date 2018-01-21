@@ -639,6 +639,38 @@ RELATION insertionSort(RELATION r, int attr)
 	return res;
 }
 
+/**
+ * @brief  Tri par bubbleSort d'une relation
+ * @note
+ * @param  r: la Relation à trier
+ * @param  attr: l'attribut sur lequel trier
+ * @retval une Relation trié
+ */
+RELATION bubbleSortR(RELATION r, int attr)
+{
+	RELATION res = newRELATION(r.attsize, r.sizemax);
+
+	int i,j;
+	printf("Test1\n");
+	afficheRELATION(res);
+	res.size = r.size;
+
+	for (i=0; i < r.size - 1; i++)
+	{
+		for (j=0; j < (r.size - i - 1); j++)
+		{
+			if (get(getNUPLET(r, j), attr) > get(getNUPLET(r, j + 1), attr))
+			{
+				res.ligne[j] =getNUPLET(r, j+1);
+				res.ligne[j+1] = getNUPLET(r, j);
+			}
+			printf("i : %d, j : %d\n", i,j);
+			afficheRELATION(res);
+		}
+	}
+	return res;
+}
+
 
 
 

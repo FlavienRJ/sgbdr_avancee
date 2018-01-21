@@ -35,13 +35,3 @@
 - Transaction et optimisation: X
 - Journalisation des requetes : OK Flavien
 
-
-
-
-## Fonctionnement general du programme
-### Demonstration
-
-
-## Regles d'utilisation
-### le langage
-

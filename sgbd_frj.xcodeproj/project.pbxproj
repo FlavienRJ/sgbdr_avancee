@@ -8,16 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		03151F501FCDC2B900858872 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 03151F4F1FCDC2B900858872 /* main.c */; };
+		0338B1922014E67800568143 /* parser.c in Sources */ = {isa = PBXBuildFile; fileRef = 0338B1912014E67800568143 /* parser.c */; };
 		038327341FF3A19100D90D7A /* relation_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 038327331FF3A19100D90D7A /* relation_helper.c */; };
 		03C636E01FE921510075A3FC /* nuplet_helper.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C636DF1FE921510075A3FC /* nuplet_helper.c */; };
 		03C7515A200D3C92000475D3 /* journalisation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C75159200D3C92000475D3 /* journalisation.c */; };
 		03C7515D200D4D5B000475D3 /* indexation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C7515C200D4D5B000475D3 /* indexation.c */; };
 		03C9E89C1FCDC531004A02E8 /* parsing.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89B1FCDC531004A02E8 /* parsing.c */; };
 		03C9E89F1FCDC5CE004A02E8 /* operateurs.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E89E1FCDC5CE004A02E8 /* operateurs.c */; };
-		03C9E8A21FCDC606004A02E8 /* table.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A11FCDC606004A02E8 /* table.c */; };
 		03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A41FCDC660004A02E8 /* optimisation.c */; };
 		03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8A71FCDC690004A02E8 /* controle_acces.c */; };
-		03C9E8AB1FCDC6C6004A02E8 /* transaction.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8AA1FCDC6C6004A02E8 /* transaction.c */; };
 		03C9E8AE1FCDC734004A02E8 /* iohelper.c in Sources */ = {isa = PBXBuildFile; fileRef = 03C9E8AD1FCDC734004A02E8 /* iohelper.c */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +36,8 @@
 		03151F4C1FCDC2B900858872 /* sgbd_frj */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sgbd_frj; sourceTree = BUILT_PRODUCTS_DIR; };
 		03151F4F1FCDC2B900858872 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		03151F561FCDC32000858872 /* sgbd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sgbd.h; sourceTree = "<group>"; };
+		0338B1902014E67800568143 /* parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parser.h; sourceTree = "<group>"; };
+		0338B1912014E67800568143 /* parser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parser.c; sourceTree = "<group>"; };
 		0361C53E1FFE89690091D459 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		038327321FF3A19100D90D7A /* relation_helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = relation_helper.h; sourceTree = "<group>"; };
 		038327331FF3A19100D90D7A /* relation_helper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = relation_helper.c; sourceTree = "<group>"; };
@@ -50,14 +51,10 @@
 		03C9E89B1FCDC531004A02E8 /* parsing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = parsing.c; sourceTree = "<group>"; };
 		03C9E89D1FCDC5CE004A02E8 /* operateurs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = operateurs.h; sourceTree = "<group>"; };
 		03C9E89E1FCDC5CE004A02E8 /* operateurs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = operateurs.c; sourceTree = "<group>"; };
-		03C9E8A01FCDC606004A02E8 /* table.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
-		03C9E8A11FCDC606004A02E8 /* table.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = table.c; sourceTree = "<group>"; };
 		03C9E8A31FCDC660004A02E8 /* optimisation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = optimisation.h; sourceTree = "<group>"; };
 		03C9E8A41FCDC660004A02E8 /* optimisation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = optimisation.c; sourceTree = "<group>"; };
 		03C9E8A61FCDC690004A02E8 /* controle_acces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = controle_acces.h; sourceTree = "<group>"; };
 		03C9E8A71FCDC690004A02E8 /* controle_acces.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = controle_acces.c; sourceTree = "<group>"; };
-		03C9E8A91FCDC6C6004A02E8 /* transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = transaction.h; sourceTree = "<group>"; };
-		03C9E8AA1FCDC6C6004A02E8 /* transaction.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = transaction.c; sourceTree = "<group>"; };
 		03C9E8AC1FCDC734004A02E8 /* iohelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iohelper.h; sourceTree = "<group>"; };
 		03C9E8AD1FCDC734004A02E8 /* iohelper.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = iohelper.c; sourceTree = "<group>"; };
 		03C9E8B01FCDC921004A02E8 /* sgbd_frj.profdata */ = {isa = PBXFileReference; lastKnownFileType = file; path = sgbd_frj.profdata; sourceTree = "<group>"; };
@@ -100,14 +97,12 @@
 				03C9E89B1FCDC531004A02E8 /* parsing.c */,
 				03C9E89D1FCDC5CE004A02E8 /* operateurs.h */,
 				03C9E89E1FCDC5CE004A02E8 /* operateurs.c */,
-				03C9E8A01FCDC606004A02E8 /* table.h */,
-				03C9E8A11FCDC606004A02E8 /* table.c */,
 				03C9E8A31FCDC660004A02E8 /* optimisation.h */,
 				03C9E8A41FCDC660004A02E8 /* optimisation.c */,
 				03C9E8A61FCDC690004A02E8 /* controle_acces.h */,
+				0338B1912014E67800568143 /* parser.c */,
+				0338B1902014E67800568143 /* parser.h */,
 				03C9E8A71FCDC690004A02E8 /* controle_acces.c */,
-				03C9E8A91FCDC6C6004A02E8 /* transaction.h */,
-				03C9E8AA1FCDC6C6004A02E8 /* transaction.c */,
 				03C9E8AC1FCDC734004A02E8 /* iohelper.h */,
 				03C9E8AD1FCDC734004A02E8 /* iohelper.c */,
 				03C636DE1FE921510075A3FC /* nuplet_helper.h */,
@@ -190,13 +185,12 @@
 			files = (
 				03C7515D200D4D5B000475D3 /* indexation.c in Sources */,
 				03C636E01FE921510075A3FC /* nuplet_helper.c in Sources */,
-				03C9E8A21FCDC606004A02E8 /* table.c in Sources */,
+				0338B1922014E67800568143 /* parser.c in Sources */,
 				03C9E8A81FCDC690004A02E8 /* controle_acces.c in Sources */,
 				03C7515A200D3C92000475D3 /* journalisation.c in Sources */,
 				03C9E8A51FCDC660004A02E8 /* optimisation.c in Sources */,
 				03C9E8AE1FCDC734004A02E8 /* iohelper.c in Sources */,
 				03C9E89F1FCDC5CE004A02E8 /* operateurs.c in Sources */,
-				03C9E8AB1FCDC6C6004A02E8 /* transaction.c in Sources */,
 				038327341FF3A19100D90D7A /* relation_helper.c in Sources */,
 				03C9E89C1FCDC531004A02E8 /* parsing.c in Sources */,
 				03151F501FCDC2B900858872 /* main.c in Sources */,

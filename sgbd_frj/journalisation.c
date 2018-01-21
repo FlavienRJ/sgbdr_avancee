@@ -16,13 +16,15 @@
 JOURNAL openLog(const char* path)
 {
 	JOURNAL tmp;
+    tmp.fp = (FILE*) malloc(sizeof(FILE));
 	if ((tmp.fp = fopen(path, "a+")) == NULL) //On peut que ajouter du texte mais on peut lire tout le fichier
 	{
 		tmp.path = "";
 		tmp.state = 0;
 		return tmp;
 	}
-	strcpy(tmp.path, path);
+	tmp.path = (char*) malloc(sizeof(char)*1024);
+    strcpy(tmp.path,path);
 	tmp.state = 1;
 	return tmp;
 }

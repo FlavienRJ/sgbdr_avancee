@@ -1,8 +1,6 @@
 #include "parser.h"
 
 //COMMIT INSERT DELETE UPDATE
-//Modifier l'appel à OpJointure
-//Faire disjonction de cas OpRestriction
 //Rajouter chaque requête dans le journal
 //Affiner la fonction de test
 
@@ -50,18 +48,16 @@ RELATION stR(char* s, BDD* bdd)
  * @param  bdd: 
  * @retval 
  */
-RELATION parser(int argc, char **argv, BDD* bdd)
+RELATION parser(int argc, char **argv, BDD* bdd, JOURNAL* log)
 {
     int r,i,j,n;
-    int selectnb=0,fromnb=0,wherenb=0,unionnb=0,unionps=0,intersectnb=0,intersectps=0,insertnb=0,insertps=0,updatenb=0,updateps=0,deletenb=0,deleteps=0,commitnb=0,commitps=0;
-    //int selectps[2], fromps[2], whereps[2];
+    int selectnb=0,fromnb=0,wherenb=0,unionnb=0,unionps=0,intersectnb=0,insertnb=0,updatenb=0,deletenb=0,commitnb=0;
     RELATION r1, r2;
     OPERATION select[2], from[2], where[2];
     OPERATION unionop, intersect;
     regex_t reg;
     
     //LEXING
-    r = regcomp(&reg, "SELECT", REG_NOSUB|REG_EXTENDED);
     for(i=1;i<argc;i++)
     {
         filterParser(argv[i]);
@@ -104,30 +100,29 @@ RELATION parser(int argc, char **argv, BDD* bdd)
         r = regcomp(&reg, "INSERT", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
-            insertps=i;
-            insertnb++;
+            //insertps=i;
+            //insertnb++;
         }
         r = regcomp(&reg, "UPDATE", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
-            updateps=i;
-            updatenb++;
+            //updateps=i;
+            //updatenb++;
         }
         r = regcomp(&reg, "DELETE", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
-            deleteps=i;
-            deletenb++;
+            //deleteps=i;
+            //deletenb++;
         }
         r = regcomp(&reg, "COMMIT", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
-            commitps=i;
-            commitnb++;
+            //commitps=i;
+            //commitnb++;
         }
     }
     
-    printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,select[0].argc,from[0].argc,where[0].argc);
     //PARSING
     
     if((selectnb==0)||(selectnb!=fromnb)||(selectnb!=(unionnb+1||intersectnb+1))||((unionnb==intersectnb)&&unionnb==1)/*||(!isdigit(*argv[fromps[0]+1]))*/)
@@ -136,6 +131,13 @@ RELATION parser(int argc, char **argv, BDD* bdd)
     }
     else
     {
+        //Writing in the log journal
+        for(i=1;i<argc;i++);
+        {
+            //Problème avec logNewCommand, commenté pour le momoent
+            //logNewCommand(log,argv[i]);
+        }
+        
         //Initialize operators
         for(i=0;i<selectnb;i++)
         {
@@ -179,9 +181,6 @@ RELATION parser(int argc, char **argv, BDD* bdd)
             }
         }
         
-        printf("%i, %i, %i, %i, %i, %i\n",selectnb,fromnb,wherenb,select[0].argc,from[0].argc,where[0].argc);
-        
-        
         //Calling everything like it should
         n=2;
         if(unionnb==1||intersectnb==1)n++;
@@ -193,14 +192,12 @@ RELATION parser(int argc, char **argv, BDD* bdd)
                 if(wherenb==i+1&&from[i].argc==2)
                 {
                     r2=newRELATION((stR(from[i].argv[0],bdd).attsize + stR(from[i].argv[1],bdd).attsize - 1), (stR(from[i].argv[0],bdd).sizemax > stR(from[i].argv[1],bdd).sizemax) ? stR(from[i].argv[0],bdd).sizemax : stR(from[i].argv[1],bdd).sizemax);
-                    //printf("%s,%s,%i,%i\n",from[i].argv[0],from[i].argv[1],atoi(where[i].argv[0]),atoi(where[i].argv[1]));
                     r2=OpJointure(stR(from[i].argv[0],bdd),stR(from[i].argv[1],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[2]));
                 }
                 if(wherenb==1&&from[i].argc==1)
                 {
                     if(isdigit(*where[i].argv[2]))
                     {
-                        printf("%s,%i,%i,%i\n",from[i].argv[0],atoi(where[i].argv[0]),atoi(where[i].argv[1]),atoi(where[i].argv[2]));
                         r2 = newRELATION(bdd->data[atoi(from[i].argv[0])].attsize, bdd->data[atoi(from[i].argv[0])].sizemax);
                         r2=OpRestrictionCST(stR(from[i].argv[0],bdd),atoi(where[i].argv[0]),atoi(where[i].argv[1]),atoi(where[i].argv[2]));
                     }
@@ -242,6 +239,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
         }
         
     }
+    
     regfree(&reg);
     return r2;
 }

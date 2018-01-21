@@ -14,9 +14,10 @@
 #include "nuplet_helper.h"
 #include "relation_helper.h"
 #include "iohelper.h"
+#include "journalisation.h"
 
 void filterParser(char* src);
-RELATION parser(int argc, char **argv, BDD* bdd);
+RELATION parser(int argc, char **argv, BDD* bdd, JOURNAL* log);
 RELATION stR(char* s, BDD* bdd);
 
 #endif /* parser_h */

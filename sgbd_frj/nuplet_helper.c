@@ -1,13 +1,17 @@
 //
 //  nuplet_helper.c
 //  sgbd_frj
-//
-//  Created by Flavien Ronteix--jacquet on 19/12/2017.
-//  Copyright © 2017 frj. All rights reserved.
-//
+//	Gestion des NUPLET
+//  
 
 #include "nuplet_helper.h"
 
+/** 
+ * @brief  Création d'un NUPLET
+ * @note   
+ * @param  size: nb d'attribut
+ * @retval retourne un NUPLET
+ */
 NUPLET newNUPLET(int size)
 {
 	NUPLET temp;
@@ -16,16 +20,38 @@ NUPLET newNUPLET(int size)
 	return temp;
 }
 
+/** 
+ * @brief  Ecriture d'un attribut d"un NUPLET
+ * @note   
+ * @param  n: le NUPLET
+ * @param  col: l'attribut
+ * @param  val: la nouvelle valeur de l'attribut
+ * @retval None
+ */
 void set(NUPLET n, int col, int val)
 {
 	n.val[col] = val;
 }
 
+/** 
+ * @brief Lecture d'un attribut d'un NUPLET 
+ * @note   
+ * @param  n: le NUPLET	
+ * @param  col: l'attribut à lire
+ * @retval 
+ */
 int get(NUPLET n, int col)
 {
 	return n.val[col];
 }
 
+/** 
+ * @brief  Copie d'un NUPLET vers un autre
+ * @note   
+ * @param  org: le NUPLET source	
+ * @param  cpy: le NUPLET destination
+ * @retval None
+ */
 void copy(const NUPLET org, NUPLET* cpy)
 {
 	int i;
@@ -35,6 +61,11 @@ void copy(const NUPLET org, NUPLET* cpy)
 	}
 }
 
+/** 
+ * @brief  Création d'un NUPLET d'erreur pour la gestion des erreurs
+ * @note   
+ * @retval 
+ */
 NUPLET newErrNUPLET(void)
 {
 	NUPLET err = newNUPLET(1);
@@ -42,7 +73,13 @@ NUPLET newErrNUPLET(void)
 	return err;
 }
 
-//Retourne la position du premier NUPLET contenant les valeurs de att s'il existe, -1 sinon
+/** 
+ * @brief  Cherche un NUPLET dans une relation
+ * @note   
+ * @param  r: la relation
+ * @param  att: un tableau d'attribut pour trouver un NUPLET
+ * @retval la position si le NUPLET existe, -1 sinon
+ */
 int findNuplet(const RELATION r, const int* att)
 {
 	int i;
@@ -71,6 +108,12 @@ int findNuplet(const RELATION r, const int* att)
 	return -1;
 }
 
+/** 
+ * @brief  Affichage d'un NUPLE
+ * @note   
+ * @param  n: le NUPLET
+ * @retval None
+ */
 void afficheNUPLET(NUPLET n)
 {
 	int i;

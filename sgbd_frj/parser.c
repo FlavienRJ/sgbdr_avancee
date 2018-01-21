@@ -6,7 +6,13 @@
 //Rajouter chaque requête dans le journal
 //Affiner la fonction de test
 
-void filter(char* src)
+/** 
+ * @brief  
+ * @note   
+ * @param  src: 
+ * @retval None
+ */
+void filterParser(char* src)
 {
     int i=0;
     char* p;
@@ -24,11 +30,26 @@ void filter(char* src)
     src[i]='\0';
 }
 
+/** 
+ * @brief  
+ * @note   
+ * @param  s: 
+ * @param  bdd: 
+ * @retval 
+ */
 RELATION stR(char* s, BDD* bdd)
 {
     return bdd->data[atoi(s)];
 }
 
+/** 
+ * @brief  
+ * @note   
+ * @param  argc: 
+ * @param  **argv: 
+ * @param  bdd: 
+ * @retval 
+ */
 RELATION parser(int argc, char **argv, BDD* bdd)
 {
     int r,i,j,n;
@@ -43,7 +64,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
     r = regcomp(&reg, "SELECT", REG_NOSUB|REG_EXTENDED);
     for(i=1;i<argc;i++)
     {
-        filter(argv[i]);
+        filterParser(argv[i]);
         r = regcomp(&reg, "SELECT", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
@@ -206,7 +227,7 @@ RELATION parser(int argc, char **argv, BDD* bdd)
                     r2=OpProjection(stR(from[i].argv[0],bdd),tab,select[i].argc);
                 }
             }
-            if(i=1)r1=r2;
+            if(i==1)r1=r2;
         }
         
         if(unionnb==1)

@@ -1,11 +1,3 @@
-/*
- * Programme funct.c
- * Création d'une mini base de données en mémoire
- * pour illustrer l'algèbre relationnelle
- * ex d'implementation : https://github.com/angelricardoh/sgbd
- */
-
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "sgbd.h"
@@ -21,8 +13,7 @@
  */
 int main(int argc, char **argv)
 {
-    BDD* bdd = newBDD();
-    bdd->data=(RELATION*)malloc(sizeof(RELATION)*10);
+    BDD* bdd = newBDD(10);
     
 	//printf("Creation d'un nuplet.");
 	NUPLET n = newNUPLET(3);
@@ -81,8 +72,8 @@ int main(int argc, char **argv)
 
 	printf("Operateur Jointure\n");
 	afficheRELATION(OpJointure(bdd->data[3], bdd->data[1], 1, 1));
-   
-    afficheRELATION(parser(argc, argv, bdd));
+
+	afficheRELATION(parser(argc, argv, bdd));
     
     
 

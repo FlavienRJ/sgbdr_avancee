@@ -1,3 +1,10 @@
+//
+//  iohelper.c
+//  sgbd_frj
+//
+//  Gestion des Base de donnée et de la lecture/ ecriture dans un fichier des BDD
+//
+
 #include "iohelper.h"
 
 /** 
@@ -5,11 +12,11 @@
  * @note   
  * @retval un pointeur sur une BDD
  */
-BDD* newBDD(void)
+BDD* newBDD(int nbTable)
 {
 	BDD* res = (BDD*)malloc(sizeof(BDD));
 	res->nbtable = 0;
-	res->data = NULL;
+	res->data = (RELATION*)malloc(sizeof(RELATION)*nbTable);
 	res->state = 0;
 	res->sizetable = NULL;
 	return res;

@@ -1,6 +1,5 @@
 /*
  * CORE HEADER
- *
  */
 
 #pragma once
@@ -10,12 +9,15 @@
 #include <stdbool.h>
 #include <string.h>
 
+/** 
+ * @brief  Les CONSTANTES
+ */
 #define TAILLE_MAX_CHAINE 256
 #define TAILLE_HASH 20
 #define TAILLE_BUCKET 256
 
 /** 
- * @brief 
+ * @brief le NUPLET
  * @val : tableau de valeur
  * @size : la taille du NUPLET
  */
@@ -26,6 +28,12 @@ typedef struct nuplet
 	
 } NUPLET;
 
+/** 
+ * @brief  le NUPLET indexé
+ * @index : l'index
+ * @val : tableau de valeur
+ * @size : la taille du NUPLET
+ */
 typedef struct nuplet_index
 {
 	int 		index;
@@ -35,7 +43,7 @@ typedef struct nuplet_index
 } NUPLET_INDEX;
 
 /** 
- * @brief
+ * @brief la RELATION
  * @ligne : un tableau de NUPLET, lignes  
  * @attsize : le nombre de colonne de la table
  * @size : le nombre de ligne
@@ -50,6 +58,13 @@ typedef struct relation
 	
 } RELATION;
 
+/** 
+ * @brief
+ * @ligne : un tableau de NUPLET_INDEX, lignes  
+ * @attsize : le nombre de colonne de la table
+ * @size : le nombre de ligne
+ * @sizemax : le nombre maximum de ligne autorisé
+ */
 typedef struct relation_index
 {
 
@@ -115,6 +130,9 @@ typedef struct bdd
 	
 } BDD;
 
+/** 
+ * @brief  un element de la liste chainé pour la table de hash
+ */
 typedef struct item_hash
 {
 	int clef;
@@ -123,12 +141,18 @@ typedef struct item_hash
 
 } ITEM_HASH;
 
+/** 
+ * @brief  La table de hash
+ */
 typedef struct table_hash
 {
 	struct item_hash* 	table[TAILLE_HASH];
 	int				size_table[TAILLE_HASH];
 } TABLE_HASH;
 
+/** 
+ * @brief  le journal
+ */
 typedef struct journal
 {
 	FILE* 	fp;

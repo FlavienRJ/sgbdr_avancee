@@ -377,6 +377,15 @@ RELATION OpJointure(RELATION r1, RELATION r2, int attr1, int attr2)
 	return res;
 }
 
+/** 
+ * @brief  Operateur de Jointure Hash Join
+ * @note   
+ * @param  r1: 
+ * @param  r2: 
+ * @param  attr1: 
+ * @param  attr2: 
+ * @retval 
+ */
 RELATION OpJointureHash(RELATION r1, RELATION r2, int attr1, int attr2)
 {
 	int i;
@@ -455,8 +464,15 @@ RELATION OpJointureHash(RELATION r1, RELATION r2, int attr1, int attr2)
 	return res;
 }
 
-
-
+/** 
+ * @brief  Operateur de jointure par Sort Merge
+ * @note   
+ * @param  r1: 
+ * @param  r2: 
+ * @param  attr1: 
+ * @param  attr2: 
+ * @retval 
+ */
 RELATION OpJointureSortMerge(RELATION r1, RELATION r2, int attr1, int attr2)
 {
 	int maxsize = (r1.sizemax > r2.sizemax) ? r1.sizemax : r2.sizemax;
@@ -551,12 +567,26 @@ RELATION OpJointureSortMerge(RELATION r1, RELATION r2, int attr1, int attr2)
 	return res;
 }
 
+
+/** 
+ * @brief  Calcul d'un hash pour une clef
+ * @note   Methode la plus simple avec le modulo
+ * @param  clef: 
+ * @retval 
+ */
 int hashCode(const int clef)
 {
 	return clef % TAILLE_HASH;
 }
 
-//On ajoute dans une liste chainée
+/** 
+ * @brief  Ajouter un NUPLET à une table de Hash par méthode la liste chainée
+ * @note   
+ * @param  hash_table: la table de Hash
+ * @param  clef: la clef (calculé avec hashCode)
+ * @param  data: la NUPLET
+ * @retval None
+ */
 void insertHash(TABLE_HASH* hash_table, int clef, NUPLET data)
 {
 	int HashIndex = hashCode(clef);
@@ -573,6 +603,13 @@ void insertHash(TABLE_HASH* hash_table, int clef, NUPLET data)
 	hash_table->size_table[HashIndex]++;
 }
 
+/** 
+ * @brief  Tri par insertionSort d'une relation
+ * @note   
+ * @param  r: la Relation à trier
+ * @param  attr: l'attribut sur lequel trier
+ * @retval une Relation trié
+ */
 RELATION insertionSort(RELATION r, int attr)
 {
 	RELATION res = newRELATION(r.attsize, r.size);

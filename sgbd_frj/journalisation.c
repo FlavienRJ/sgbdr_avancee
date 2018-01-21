@@ -2,12 +2,17 @@
 //  journalisation.c
 //  sgbd_frj
 //
-//  Created by Flavien Ronteix--jacquet on 13/01/2018.
-//  Copyright © 2018 frj. All rights reserved.
+//  Gestion de l'ecriture de Log dans un fichier
 //
 
 #include "journalisation.h"
 
+/** 
+ * @brief  Création et ouverture d'un journal
+ * @note   
+ * @param  path: le chemin vers le fichier journal
+ * @retval un journal
+ */
 JOURNAL openLog(const char* path)
 {
 	JOURNAL tmp;
@@ -22,6 +27,13 @@ JOURNAL openLog(const char* path)
 	return tmp;
 }
 
+/** 
+ * @brief  Ecriture dans le fichier journal d'une nouvelle commande
+ * @note   
+ * @param  log: le journal
+ * @param  command: la commande à log
+ * @retval 
+ */
 int logNewCommand(JOURNAL* log, const char* command)
 {
 	if (log->state == 0)
@@ -32,6 +44,12 @@ int logNewCommand(JOURNAL* log, const char* command)
 	return 1;
 }
 
+/** 
+ * @brief  Fermeture du journal
+ * @note   
+ * @param  log: 
+ * @retval 
+ */
 int closeLog(JOURNAL log)
 {
 	if (log.state == 0)

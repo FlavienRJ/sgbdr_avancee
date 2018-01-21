@@ -15,7 +15,7 @@
 #include "nuplet_helper.h"
 #include "relation_helper.h"
 
-BDD* newBDD(void);
+BDD* newBDD(int nbTable);
 int openTable(char* parPath, char* parName, BDD* parBdd);
 int closeBDD(BDD* parBDD);
 int store(BDD* parBdd, const char* parTable, int parPos, NUPLET parVal);

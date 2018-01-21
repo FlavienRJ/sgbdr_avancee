@@ -15,7 +15,7 @@
 #include "relation_helper.h"
 #include "iohelper.h"
 
-void filter(char* src);
+void filterParser(char* src);
 RELATION parser(int argc, char **argv, BDD* bdd);
 RELATION stR(char* s, BDD* bdd);
 

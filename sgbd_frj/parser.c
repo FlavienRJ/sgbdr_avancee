@@ -1,15 +1,7 @@
 #include "parser.h"
 
-//COMMIT INSERT DELETE UPDATE
-//Rajouter chaque requête dans le journal
-//Affiner la fonction de test
 
-/** 
- * @brief Delete every character that is not a letter or a number
- * @note   
- * @param  src: The string to filter
- * @retval None
- */
+
 void filterParser(char* src)
 {
     int i=0;
@@ -28,27 +20,12 @@ void filterParser(char* src)
     src[i]='\0';
 }
 
-/** 
- * @brief Return a relation from a number
- * @note   
- * @param  s: The relation number
- * @param  bdd: The bdd structure
- * @retval 
- */
+
 RELATION stR(char* s, BDD* bdd)
 {
     return bdd->data[atoi(s)];
 }
 
-/** 
- * @brief Detect what kind of arguments there is and makes the related operations. Is a bit capricious still.
- * @note   
- * @param  argc: Regular argc
- * @param  **argv: Regular arv
- * @param  bdd: The bdd structure
- * @param  log: The log structure 
- * @retval 
- */
 RELATION parser(int argc, char **argv, BDD* bdd, JOURNAL* log)
 {
     int r,i,j,n;

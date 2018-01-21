@@ -5,9 +5,9 @@
 //Affiner la fonction de test
 
 /** 
- * @brief  
+ * @brief Delete every character that is not a letter or a number
  * @note   
- * @param  src: 
+ * @param  src: The string to filter
  * @retval None
  */
 void filterParser(char* src)
@@ -29,10 +29,10 @@ void filterParser(char* src)
 }
 
 /** 
- * @brief  
+ * @brief Return a relation from a number
  * @note   
- * @param  s: 
- * @param  bdd: 
+ * @param  s: The relation number
+ * @param  bdd: The bdd structure
  * @retval 
  */
 RELATION stR(char* s, BDD* bdd)
@@ -41,11 +41,12 @@ RELATION stR(char* s, BDD* bdd)
 }
 
 /** 
- * @brief  
+ * @brief Detect what kind of arguments there is and makes the related operations. Is a bit capricious still.
  * @note   
- * @param  argc: 
- * @param  **argv: 
- * @param  bdd: 
+ * @param  argc: Regular argc
+ * @param  **argv: Regular arv
+ * @param  bdd: The bdd structure
+ * @param  log: The log structure 
  * @retval 
  */
 RELATION parser(int argc, char **argv, BDD* bdd, JOURNAL* log)
@@ -101,25 +102,25 @@ RELATION parser(int argc, char **argv, BDD* bdd, JOURNAL* log)
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
             //insertps=i;
-            //insertnb++;
+            insertnb++;
         }
         r = regcomp(&reg, "UPDATE", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
             //updateps=i;
-            //updatenb++;
+            updatenb++;
         }
         r = regcomp(&reg, "DELETE", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
             //deleteps=i;
-            //deletenb++;
+            deletenb++;
         }
         r = regcomp(&reg, "COMMIT", REG_NOSUB|REG_EXTENDED);
         if (regexec(&reg, argv[i], 1, NULL, 0) != REG_NOMATCH)
         {
             //commitps=i;
-            //commitnb++;
+            commitnb++;
         }
     }
     
@@ -132,11 +133,11 @@ RELATION parser(int argc, char **argv, BDD* bdd, JOURNAL* log)
     else
     {
         //Writing in the log journal
-        for(i=1;i<argc;i++);
-        {
+        //for(i=1;i<argc;i++);
+        //{
             //Problème avec logNewCommand, commenté pour le momoent
             //logNewCommand(log,argv[i]);
-        }
+        //}
         
         //Initialize operators
         for(i=0;i<selectnb;i++)
